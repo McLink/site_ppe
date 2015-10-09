@@ -1,0 +1,17 @@
+diff a/index.html b/index.html	(rejected hunks)
+@@ -54,12 +54,9 @@
+           <div class="row">
+             <img class="col-xs-8 col-sm-4 col-md-4 col-lg-4" src="Images/Image1.png"></img>
+             <p class="col-lg-8">
+-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+-              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
++             Vous trouverez toute les informations nécessaire pour vos démarches et nos différents services.
++             Le site de la mairie est fait spécialement pour vous aidez dans vos demandes, pour cela il y a diéfférentes rubriques qui nous l'espérons vous satisfairont.
++
+             </p>
+           </div>
+         </section>

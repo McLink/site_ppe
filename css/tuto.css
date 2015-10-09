@@ -1,0 +1,57 @@
+#banniere
+{
+  width: 100%;
+
+}
+#image2
+{
+  float: right;
+}
+html body
+{
+  background-image: url("../Images/Background.png");
+  width:100%;
+  background-size: cover;
+}
+
+footer
+{
+  background:#4C5858;
+  height:10%;
+  color:white;
+  padding-top:10px;
+}
+
+#couleur li:hover
+{
+  background-color: gray;
+}
+#couleur li a,
+{
+  color:black;
+}
+#couleurnav
+{
+  background-color: #F9FFFF;
+}
+
+@media (min-width: 768px) {
+  .container{
+    width: 768px;
+  }
+}
+@media (min-width: 992px) {
+  .container{
+    width: 992px;
+  }
+}
+@media (min-width: 1200px) {
+  .container{
+    width: 1200px;
+  }
+}
+@media(min-width:1600px){
+  .container{
+    width: 1600px;
+  }
+}
