@@ -2,7 +2,7 @@
 //Parametre de connexion à la base de données
 $BD_serveur = "localhost";
 $BD_utilisateur = "root";
-$BD_motDePasse = "";
+$BD_motDePasse = "root";
 $BD_base = "mairiedevilliers";
 
 //Récupération des parametre POST
@@ -14,10 +14,10 @@ $prenom = $_POST["prenom"];
 $sexe = $_POST["sexe"];
 $datenaiss = $_POST["datenaiss"];
 $adresse = $_POST["adresse"];
-$tel = $_POST["tel"];
-$email = VerifierAdresseMail($_POST["email"]);
-$ville = $_POST["ville"];
 $cp = $_POST["cp"];
+$ville = $_POST["ville"];
+$email = VerifierAdresseMail($_POST["email"]);
+$tel = $_POST["tel"];
 
 //Vérification du login
 if(isset($login))
@@ -203,14 +203,14 @@ function VerifierAdresseMail($email)
 //Vérification de la ville
 if(isset($ville))
 {
-	if(ctype_alpha($ville))
+	if(ctype_digit($ville))
 	{
-		echo "Votre ville est".$ville;
+		echo "Nom de ville inconnu, veuillez entrer que des lettres";
 		echo "</br>";
 	}
 	else
 	{
-		echo "Veuillez entrer que des lettres";
+		echo "Votre ville est".$ville;
 		echo "</br>";
 	}
 }
