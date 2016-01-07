@@ -2,7 +2,7 @@
 //Parametre de connexion à la base de données
 $BD_serveur = "localhost";
 $BD_utilisateur = "root";
-$BD_motDePasse = "root";
+$BD_motDePasse = "";
 $BD_base = "mairiedevilliers";
 
 //Récupération des parametre POST
