@@ -1,7 +1,7 @@
 <? php
 session_start();
 $titre="Connexion";
-include("connexion_base");
+include("connexion_base.php");
 echo'<p><i>Vous êtes ici</i> : <a href="./index.html">Page de connexion au site</a> ---> Connexion';
 
 function erreur($err='')

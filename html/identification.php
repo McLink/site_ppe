@@ -108,4 +108,6 @@ if (isset($_POST['login']))
     $message = 'Les champs Pseudo et Mot de passe doivent être remplis.';
     }
 }
+
+
 ?>

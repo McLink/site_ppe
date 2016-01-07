@@ -1,9 +1,7 @@
 <?php
-//Parametre de connexion à la base de données
-$BD_serveur = "localhost";
-$BD_utilisateur = "root";
-$BD_motDePasse = "";
-$BD_base = "mairiedevilliers";
+include("connexion_base.php"); // connexion à la bdd
+ini_set('display_errors', 1);
+header( 'content-type: text/html; charset=utf-8' );
 
 //Récupération des parametre POST
 $login = $_POST["login"];
@@ -228,21 +226,33 @@ if(isset($cp))
 }
 else
 {
-	echo "Veuillez entre votre code postal";
+	echo "Veuillez entrer votre code postal";
 	echo "</br>";
 }
 
-//Connexion à la base de données
-@mysql_pconnect($BD_serveur, $BD_utilisateur, $BD_motDePasse) or die("Impossible de se connecter au serveur de la base de données");
-@mysql_select_db($BD_base) or die("Impossible de se connecter à la base de données");
 
-//Requete d'envoie des données
-$requete = "INSERT INTO personne (Sexe, Nom, Prenom, Adresse, CP, Tel, Email, Login, Mot_De_Passe) 
-			VALUES ('$sexe','$nom','$prenom','$adresse','$cp','$tel','$email','$login','$password')";
-$result = @mysql_query($requete);
-@mysql_query ("INSERT INTO personne(datenaiss) VALUES ('$datenaiss')");
+//Connexion à la base de données
+//@mysql_pconnect($BD_serveur, $BD_utilisateur, $BD_motDePasse) or die("Impossible de se connecter au serveur de la base de données");
+//@mysql_select_db($BD_base) or die("Impossible de se connecter à la base de données");
+
+//Requete d'envoi des données
+$requete = $bdd->prepare("INSERT INTO personne (Sexe, Nom, Prenom, datenaiss, Adresse, CP, Tel, Email, Login, Mot_De_Passe) 
+	VALUES (':sexe',':nom',':prenom',':datenaiss', ':adresse',':cp',':tel',':email',':login',':password')");
+$requete->execute(array(
+
+	'sexe'=>$sexe,
+	'nom'=>$nom,
+	'prenom'=>$prenom,
+	'datenaiss'=>$datenaiss,
+	'adresse'=>$adresse,
+	'cp'=>$cp,
+	'tel'=>$tel,
+	'email'=>$email,
+	'login'=>$login,
+	'$password'=>$password));
+
 //Résultat d'enregistrement
-if(!$result)
+/*if(!$result)
 {
 	echo "Mauvaises informations";
 }
@@ -250,7 +260,9 @@ else
 {
 	echo "Felicitation vous avez ete enregistre";
 }
+echo $result;*/
 
-header('refresh:5;../index.html');
-exit();
+
+//header('refresh:10;../index.html');
+//exit();
 ?>
