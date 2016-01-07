@@ -250,4 +250,7 @@ else
 {
 	echo "Felicitation vous avez ete enregistre";
 }
+
+header('refresh:5;../index.html');
+exit();
 ?>
