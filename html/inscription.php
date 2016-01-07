@@ -62,7 +62,7 @@ if(isset($nom))
 {
 	if(ctype_alpha($nom))
 	{
-		echo "Votre nom est".$nom;
+		echo "Votre nom est ".$nom;
 		echo "</br>";
 	}
 	else
@@ -82,7 +82,7 @@ if(isset($prenom))
 {
 	if(ctype_alpha($prenom))
 	{
-		echo "Votre prenom est".$prenom;
+		echo "Votre prenom est ".$prenom;
 		echo "</br>";
 	}
 	else
@@ -117,7 +117,7 @@ else
 //Vérification de la date de naissance
 if(isset($datenaiss))
 {
-	echo "Votre date de naissance est valide" .$datenaiss;
+	echo "Votre date de naissance est valide ".$datenaiss;
 	echo "</br>";
 }
 else
@@ -129,7 +129,7 @@ else
 //Vérification de l'addresse
 if(isset($adresse))
 {
-	echo "Votre adresse est".$adresse;
+	echo "Votre adresse est ".$adresse;
 	echo "</br>";
 }
 else
@@ -143,29 +143,21 @@ if(isset($tel))
 {
 	if(ctype_digit($tel))
 	{
-		if(($tel) == 10)
-		{
-			echo "Votre numéro est".$tel;
-			echo "</br>";
-		}
-		else
-		{
-			echo "Il manque des chiffres";
-			echo "</br>";
-		}		
-	}
-	else
+        echo "Votre numéro est ".$tel;
+        echo "</br>";
+    }
+    else
 	{
-		echo "Veuillez entrer que des nombres";	
-		echo "</br>";
-	}
+        echo "Il manque des chiffres";
+        echo "</br>";
+    }		
 }
 else
 {
-	echo "Veuillez entre votre numéro";
+	echo "Veuillez entrer que des nombres";	
 	echo "</br>";
-
 }
+
 
 //Vérification du mail
 function VerifierAdresseMail($email)
@@ -210,7 +202,7 @@ if(isset($ville))
 	}
 	else
 	{
-		echo "Votre ville est".$ville;
+		echo "Votre ville est ".$ville;
 		echo "</br>";
 	}
 }
@@ -225,7 +217,7 @@ if(isset($cp))
 {
 	if(ctype_digit($cp))
 	{
-		echo "Votre code postal est".$cp;
+		echo "Votre code postal est ".$cp;
 		echo "</br>";
 	}
 	else
