@@ -21,11 +21,15 @@ else
 	if (empty($_POST['login']) || empty($_POST['password'])
 	{
 		$message= '<p>Une erreur s/'est produite pendant votre identification. Vous devez remplir tous les champs</p>
-		<p>Cliquez <a href="./connexion.php">ici</a> pour revenir</p>;
+		<p>Cliquez <a href="../index.html">ici</a> pour revenir</p>;
 	}
 	else
 	{
 		$query=$db->prepare('SELECT login, password from personne')
+		header('refresh:0;utilisateur.php');
+		exit();
 
 	}
+}
+	
 ?>
