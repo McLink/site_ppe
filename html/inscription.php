@@ -250,7 +250,7 @@ $requete->execute(array(
 	'tel'=>$tel,
 	'email'=>$email,
 	'login'=>$login,
-	'password'=>$password));
+	'password'=>$password_hache,));
 
 echo "Felicitation vous avez ete enregistre";
 
