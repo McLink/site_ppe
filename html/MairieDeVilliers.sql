@@ -3,7 +3,7 @@ Use MairieDeVilliers;
 
 
 
-Create table Personne(IDClient int not null,
+Create table Personne(IDClient int auto_increment,
 					  Sexe varchar(1),
 					  Nom varchar(20),
 					  Prenom varchar(20),

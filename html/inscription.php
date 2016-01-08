@@ -4,6 +4,7 @@ ini_set('display_errors', 1);
 header( 'content-type: text/html; charset=utf-8' );
 
 //Récupération des parametre POST
+
 $login = $_POST["login"];
 $password = $_POST["password"];
 $password2 = $_POST["password2"];
@@ -236,8 +237,8 @@ else
 //@mysql_select_db($BD_base) or die("Impossible de se connecter à la base de données");
 
 //Requete d'envoi des données
-$requete = $bdd->prepare("INSERT INTO personne (Sexe, Nom, Prenom, datenaiss, Adresse, CP, Tel, Email, Login, Mot_De_Passe) 
-	VALUES (':sexe',':nom',':prenom',':datenaiss', ':adresse',':cp',':tel',':email',':login',':password')");
+$requete = $bdd->prepare("INSERT INTO personne(Sexe, Nom, Prenom, datenaiss, Adresse, CP, Tel, Email, Login, Mot_De_Passe) 
+	VALUES(:sexe,:nom,:prenom,:datenaiss, :adresse,:cp,:tel,:email,:login,:password);");
 $requete->execute(array(
 
 	'sexe'=>$sexe,
@@ -249,7 +250,7 @@ $requete->execute(array(
 	'tel'=>$tel,
 	'email'=>$email,
 	'login'=>$login,
-	'$password'=>$password));
+	'password'=>$password));
 
 //Résultat d'enregistrement
 /*if(!$result)
