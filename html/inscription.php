@@ -252,6 +252,8 @@ $requete->execute(array(
 	'login'=>$login,
 	'password'=>$password));
 
+echo "Felicitation vous avez ete enregistre";
+
 //Résultat d'enregistrement
 /*if(!$result)
 {
@@ -264,6 +266,6 @@ else
 echo $result;*/
 
 
-//header('refresh:10;../index.html');
-//exit();
+header('refresh:5;../index.html');
+exit();
 ?>
