@@ -46,10 +46,11 @@ Create table CentreDeLoisirs(IDInscrit int(3) not null,
 							 Foreign Key(IDEnf) References Enfant(IDEnf));
 							 
 Create table Cantine(IDInscrit int(3) not null,
+ 					 IDEnf int(3) not null,
 					 Etablissement varchar(25),
 					 DateInscription date,
 					 Capacite varchar(20),
-					 IDEnf int(3) not null,
+					 nbEnfant int(3);
 					 Primary Key(IDInscrit,IDEnf),
 					 Foreign Key(IDEnf) References Enfant(IDEnf));
 
