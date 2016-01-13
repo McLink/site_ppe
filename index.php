@@ -1,3 +1,10 @@
+<?php 
+if (isset($_SESSION['login']))
+{
+    echo 'Bonjour ' . $_SESSION['login'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
   <head>
