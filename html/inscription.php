@@ -8,6 +8,7 @@ header( 'content-type: text/html; charset=utf-8' );
 $login = $_POST["login"];
 $password = $_POST["password"];
 $password2 = $_POST["password2"];
+$password_hache=sha1($_POST["password"]);
 $nom = $_POST["nom"];
 $prenom = $_POST["prenom"];
 $sexe = $_POST["sexe"];
