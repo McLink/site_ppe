@@ -8,7 +8,7 @@ $password_hache = sha1($_POST['password']);
 $login=$_POST['login'];
 
 // Vérification des identifiants
-$req = $bdd->prepare('SELECT IDClient FROM personne WHERE Login = :login AND  Mot_De_Passe = :password');
+$req = $bdd->prepare('SELECT Login FROM personne WHERE Login  = :login AND  Mot_De_Passe = :password');
 $req->execute(array(
     'login' => $login,
     'password' => $password_hache));
@@ -22,7 +22,6 @@ if (!$resultat)
 else
 {
     session_start();
-    $_SESSION['IDClient'] = $resultat['IDClient'];
     $_SESSION['login'] = $login;
     echo 'Vous êtes connecté !';
 }
