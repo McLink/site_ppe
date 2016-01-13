@@ -24,6 +24,9 @@ else
     session_start();
     $_SESSION['login'] = $login;
     echo 'Vous êtes connecté !';
+
+    header('refresh:3;../index.php');
+	exit();
 }
 	
 ?>

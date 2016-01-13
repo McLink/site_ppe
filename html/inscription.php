@@ -267,6 +267,6 @@ else
 echo $result;*/
 
 
-header('refresh:5;../index.html');
+header('refresh:5;../index.php');
 exit();
 ?>
