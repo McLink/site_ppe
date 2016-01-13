@@ -30,12 +30,12 @@
           <!--Début de la barre de navigation -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav" id="couleur">
-              <li class="active"><a href="index.html">Accueil<span class="sr-only">(current)</span></a></li>
+              <li class="active"><a href="index.php">Accueil<span class="sr-only">(current)</span></a></li>
               <!--Ici on indique que l'icome de la page courante est celle active(donc grisée)-->
-              <li><a href="html/Services.html">Services</a></li>
-              <li><a href="html/FAQ.html">FAQ</a></li>
-              <li><a href="html/Contact.html">Contact</a></li>
-              <li><a href="html/Mentions légales.html">Mentions légales</a></li>
+              <li><a href="html/Services.php">Services</a></li>
+              <li><a href="html/FAQ.php">FAQ</a></li>
+              <li><a href="html/Contact.php">Contact</a></li>
+              <li><a href="html/Mentions_legales.php">Mentions légales</a></li>
             </ul>
              <form class="navbar-form navbar-right" action="html/connexion.php" method="POST">
         <div class="form-group">
@@ -43,7 +43,7 @@
           <input type="password" class="form-control" name="password" placeholder="Mot de passe">
         </div>
         <button class="btn btn-default" type="submit">Connexion</button>
-        <a class="btn btn-default" role="button" href="html/Inscription.html">Inscription</a>
+        <a class="btn btn-default" role="button" href="html/Page_Inscription.php">Inscription</a>
       </form>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
