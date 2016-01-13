@@ -1,35 +1,29 @@
-<? php
-session_start();
+<?php
+
 $titre="Connexion";
 include("connexion_base.php");
-echo'<p><i>Vous êtes ici</i> : <a href="./index.html">Page de connexion au site</a> ---> Connexion';
 
-function erreur($err='')
+// Hachage du mot de passe
+$password_hache = sha1($_POST['password']);
+$login=$_POST['login'];
+
+// Vérification des identifiants
+$req = $bdd->prepare('SELECT Login FROM personne WHERE Login  = :login AND  Mot_De_Passe = :password');
+$req->execute(array(
+    'login' => $login,
+    'password' => $password_hache));
+
+$resultat = $req->fetch();
+
+if (!$resultat)
 {
-	$mess=($err!='')? $err:'Une erreur inconnue s\'est produite';
-	exit('<p>'.$mess.'</p>
-	<p>Cliquez <a href="./index.html">ici</a> pour revenir à la page d'acceuil</p>
+    echo 'Mauvais identifiant ou mot de passe !';
 }
-
-echo"<h1>Connexion</h1>";
-if ($id!=0) 
-erreur(ERR_IS_CO);
-
-else 
+else
 {
-	$message='';
-	if (empty($_POST['login']) || empty($_POST['password'])
-	{
-		$message= '<p>Une erreur s/'est produite pendant votre identification. Vous devez remplir tous les champs</p>
-		<p>Cliquez <a href="../index.html">ici</a> pour revenir</p>;
-	}
-	else
-	{
-		$query=$db->prepare('SELECT login, password from personne')
-		header('refresh:0;utilisateur.php');
-		exit();
-
-	}
+    session_start();
+    $_SESSION['login'] = $login;
+    echo 'Vous êtes connecté !';
 }
 	
 ?>

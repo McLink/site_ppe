@@ -9,7 +9,7 @@
 
 <body>
       <header id="top">
-        <a href="../index.html"><img class="img-responsive" id="banniere" src="../Images/banniere2.png"></img></a>
+        <a href="../index.php"><img class="img-responsive" id="banniere" src="../Images/banniere2.png"></img></a>
       </header>
     <div class="container-fluid">
       <div class="row">
@@ -30,20 +30,20 @@
     <!--Début de la barre de navigation -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav" id="couleur">
-        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="../index.php">Accueil</a></li>
         <!--Ici on indique que l'icome de la page courante est celle active(donc grisée)-->
-        <li><a href="../html/Services.html">Services</a></li>
-        <li><a href="../html/FAQ.html">FAQ</a><li>
-        <li><a href="../html/Contact.html">Contact</a><li>
-        <li class="active"><a href="Mentions légales.html">Mentions légales<span class="sr-only">(current)</span></a></li>
+        <li><a href="../html/Services.php">Services</a></li>
+        <li><a href="../html/FAQ.php">FAQ</a><li>
+        <li><a href="../html/Contact.php">Contact</a><li>
+        <li class="active"><a href="Mentions_legales.php">Mentions légales<span class="sr-only">(current)</span></a></li>
       </ul>
-      <form class="navbar-form navbar-right" role="search">
+      <form class="navbar-form navbar-right" action="connexion.php" method="POST">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Login">
-          <input type="password" class="form-control" placeholder="Mot de passe">
+          <input type="text" class="form-control" name="login" placeholder="Login">
+          <input type="password" class="form-control" name="password" placeholder="Mot de passe">
         </div>
-        <a class="btn btn-default" href="connexion.php">Connexion</a>
-        <a class="btn btn-default" href="Inscription.html">Inscription</a>
+        <button class="btn btn-default" type="submit">Connexion</button>
+        <a class="btn btn-default" role="button" href="Page_Inscription.php">Inscription</a>
       </form>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
