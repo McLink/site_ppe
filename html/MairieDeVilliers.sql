@@ -13,7 +13,7 @@ Create table Personne(IDClient int auto_increment,
 					  Tel int(10) not null,
 					  Email varchar(25),
 					  Login varchar(25),
-					  Mot_de_Passe varchar(25),
+					  Mot_de_Passe varchar(40),
 					  Primary Key(IDClient));
 					  
 
