@@ -1,3 +1,8 @@
+<?php
+include("connexion_base.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -25,7 +30,7 @@
           </button>
           <!--Ici il s'agit du bouton permettant de faire défiler le menu lorsqu'il est réglé pour les mobiles-->
         </div>
-    Voici la liste des utilisateurs:
+    <h1>Voici la liste des utilisateurs:</h1>
     <table>
     <tr>
         <th>Id</th>
@@ -34,13 +39,21 @@
     </tr>
     <?php
     //On recupere les identifiants, les pseudos et les emails des utilisateurs
-    $req = mysql_query('select IDClient, login, email from personne');
-    while($dnn = mysql_fetch_array($req))
-    {
+    $IDClient = $_POST['IDClient'];
+    $login = $_POST['login'];
+    $email = $_POST['email'];
+
+    $req = $bdd->prepare('SELECT IDClient, login, email FROM personne');
+    $req->execute(array(
+      'IDClient' => $IDClient,
+      'login' => $login,
+      'email' => $email));
+
+    $res = $req->fetch();
     ?>
         <tr>
-        <td class="left"><?php echo $dnn['id']; ?></td>
-        <td class="left"><a href="Profil_Utilisateur.php?id=<?php echo $dnn['id']; ?>"><?php echo htmlentities($dnn['login'], ENT_QUOTES, 'UTF-8'); ?></a></td>
+        <td class="left"><?php echo $dnn['IDClient']; ?></td>
+        <td class="left"><a href="Profil_Utilisateur.php?id=<?php echo $dnn['IDClient']; ?>"><?php echo htmlentities($dnn['login'], ENT_QUOTES, 'UTF-8'); ?></a></td>
         <td class="left"><?php echo htmlentities($dnn['email'], ENT_QUOTES, 'UTF-8'); ?></td>
     </tr>
 
@@ -57,6 +70,7 @@
         </div>
 
 
+
       </footer>
     </div>
   </div>
@@ -64,16 +78,10 @@
     <script src="../js/jquery-1.11.2.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <!-- Ici se trouve des fichiers Javascript nécessaires (notamment la librairie jQuery) -->
-        <script type="text/javascript">
-      $('a[href^="#top"]').click(function(){
-      var the_id = $(this).attr("href");
+    header('refresh:3;../Profil_Utilisateur.php');
+    exit();
 
-      $('html, body').animate({
-        scrollTop:$(the_id).offset().top
-      }, 'slow');
-      return false;
-      });
-    </script>
+
   </body>
     
 </html>
