@@ -37,7 +37,7 @@
         <li><a href="../html/Contact.php">Contact</a><li>
         <li class="active"><a href="Mentions_legales.php">Mentions légales<span class="sr-only">(current)</span></a></li>
       </ul>
-      <form class="navbar-form navbar-right" action="connexion.php" method="POST">
+      <form class="navbar-form navbar-right" action="ConnexionAdmin.php" action="connexion.php" method="POST">
         <div class="form-group">
           <input type="text" class="form-control" name="login" placeholder="Login">
           <input type="password" class="form-control" name="password" placeholder="Mot de passe">

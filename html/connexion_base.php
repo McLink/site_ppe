@@ -1,5 +1,4 @@
-
-	<?php
+<?php
   try
   {
 	$bdd = new PDO('mysql:host=localhost;dbname=mairiedevilliers;charset=utf8','root','');

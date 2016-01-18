@@ -1,5 +1,10 @@
 <?php
 include("connexion_base.php");
+session_start();
+if (isset($_SESSION['login']))
+{
+    echo 'Bonjour ' . $_SESSION['login'];
+}
 
 ?>
 
@@ -78,9 +83,10 @@ include("connexion_base.php");
     <script src="../js/jquery-1.11.2.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <!-- Ici se trouve des fichiers Javascript nécessaires (notamment la librairie jQuery) -->
+    <? php
     header('refresh:3;../Profil_Utilisateur.php');
     exit();
-
+    ?>
 
   </body>
     
