@@ -15,8 +15,8 @@ $req->execute(array(
 
 $resultat = $req->fetch();
 
-while(!$resultat)
-{
+
+
     if($resultat)
     {
         session_start();
@@ -26,7 +26,7 @@ while(!$resultat)
         header('refresh:3;Espace_Utilisateur.php');
         exit();
     }
-    else 
+    /*else 
     {
         echo 'Veuillez réessayer';
     }
@@ -42,9 +42,9 @@ while(!$resultat)
     else 
     {
         echo 'Veuillez réessayer';
-    }
+    }*/
 
    echo 'Veuillez réessayer';
-}
+
 
 ?>
