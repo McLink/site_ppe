@@ -35,32 +35,42 @@ if (isset($_SESSION['login']))
           </button>
           <!--Ici il s'agit du bouton permettant de faire défiler le menu lorsqu'il est réglé pour les mobiles-->
         </div>
-    <h1>Voici la liste des utilisateurs:</h1>
-    <table>
-    <tr>
-        <th>Id</th>
-        <th>Nom d'utilisateur</th>
-        <th>Email</th>
-    </tr>
     <?php
-    //On recupere les identifiants, les pseudos et les emails des utilisateurs
-    $IDClient = $_POST['IDClient'];
-    $login = $_POST['login'];
-    $email = $_POST['email'];
-
-    $req = $bdd->prepare('SELECT IDClient, login, email FROM personne');
-    $req->execute(array(
-      'IDClient' => $IDClient,
-      'login' => $login,
-      'email' => $email));
-
-    $res = $req->fetch();
-    ?>
+//On verifie que lidentifiant de lutilisateur est defini
+if(isset($_GET['login'])){
+        $log = intval($_GET['login']);
+        //On verifie que lutilisateur existe
+        $request = mysql_query('select sexe, nom, prenom, datenaiss, adresse, cp, tel, email, login from Personne where login="'.$log.'"');
+        if(mysql_num_rows($req)>0){
+                $result = mysql_fetch_array($request);
+                //On affiche les donnees de lutilisateur
+?>
+Voici le profil de "<?php echo htmlentities($result['login']); ?>" :
+<table style="width:500px;">
         <tr>
-        <td class="left"><?php echo $dnn['IDClient']; ?></td>
-        <td class="left"><a href="Profil_Utilisateur.php?id=<?php echo $dnn['IDClient']; ?>"><?php echo htmlentities($dnn['login'], ENT_QUOTES, 'UTF-8'); ?></a></td>
-        <td class="left"><?php echo htmlentities($dnn['email'], ENT_QUOTES, 'UTF-8'); ?></td>
+        <td class="left"><h1><?php echo htmlentities($result['login'], ENT_QUOTES, 'UTF-8'); ?></h1>
+        Sexe: <?php echo htmlentities($result['sexe'], ENT_QUOTES, 'UTF-8'); ?><br />
+        Nom: <?php echo htmlentities($result['nom'], ENT_QUOTES, 'UTF-8'); ?><br />
+        Prénom: <?php echo htmlentities($result['prenom'], ENT_QUOTES, 'UTF-8'); ?><br />
+        Date de naissance: <?php echo htmlentities($result['datenaiss'], ENT_QUOTES, 'UTF-8'); ?><br />
+        Adresse: <?php echo htmlentities($result['adress'], ENT_QUOTES, 'UTF-8'); ?><br />
+        Code Postal: <?php echo htmlentities($result['cp'], ENT_QUOTES, 'UTF-8'); ?><br />
+        Téléphone: <?php echo htmlentities($result['tel'], ENT_QUOTES, 'UTF-8'); ?><br />
+        Email: <?php echo htmlentities($result['email'], ENT_QUOTES, 'UTF-8'); ?><br />
+        Login: <?php echo htmlentities($result['login'], ENT_QUOTES, 'UTF-8'); ?><br />
+        </td>
     </tr>
+</table>
+<?php
+        }
+        else{
+            echo 'Cet utilisateur n\'existe pas.';
+        }
+}
+else{
+    echo 'L\'identifiant de l\'utilisateur n\'est pas d&eacute;fini.';
+}
+?>
 
    <div class="row">
       <footer class="col-lg-12">

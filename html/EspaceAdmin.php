@@ -12,13 +12,13 @@ if (isset($_SESSION['login']))
   <head>
     <meta charset="utf-8">
     <title>Mairie de villiers | Pour une ville souriante et conviviale !</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/tuto.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/tuto.css" rel="stylesheet">
   </head>
 
 <body>
 <header id="top">
-  <a href="index.html"><img class="img-responsive" id="banniere" src="Images/banniere2.png"></img></a>
+  <a href="../index.html"><img class="img-responsive" id="banniere" src="../Images/banniere2.png"></img></a>
 </header>
 <div class="container-fluid">
   <div class="row">
@@ -39,10 +39,10 @@ if (isset($_SESSION['login']))
           <!--Début de la barre de navigation -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav" id="couleur">
-              <li class="active"><a href="index.php">Accueil<span class="sr-only">(current)</span></a></li>
+              <li class="active"><a href="../index.php">Accueil<span class="sr-only">(current)</span></a></li>
               <!--Ici on indique que l'icome de la page courante est celle active(donc grisée)-->
-              <li><a href="html/ModifComptes.php">Modification des comptes utilisateurs</a></li>
-                <li><a href="html/ModifActivites.php">Modification des activitès</a></li>
+              <li><a href="../html/ModifComptes.php">Modification des comptes utilisateurs</a></li>
+                <li><a href="../html/ModifActivites.php">Modification des activitès</a></li>
             </ul>
        <!--     <form class="navbar-form navbar-right" action="html/connexion.php" method="POST">
         <div class="form-group">
@@ -70,23 +70,15 @@ if (isset($_SESSION['login']))
         <section class="col-lg-offset-2 col-lg-8 col-lg-offset-2" >
           <h1>Les options que vous disposez :</h1>
           <div class="row">
-            <img class="col-xs-8 col-sm-6 col-lg-4" id="image2" src="Images/Image2.png"></img>
-            <p class="col-lg-8">
+            <p>
               <ul>
               <li>Accéder aux comptes pour modifier les comptes utilisateurs.</li>
-              <li>Modifier les activités des enfants inscrit.</li>
               <li>Ajouter ou supprimer une inscription dans une cantine ou dans un centre de loisir.</li>
               </ul>
             </p>
           </div>
         </section>
       </div>
-      <div class="col-lg-offset-2 col-lg-8 col-lg-offset-2">
-        <!-- Insertion du flux RSS -->
-        <iframe src="http://s1.rsspump.com/rss.aspx?s=881109b5-b7ed-4829-ac93-c3ac8f715f28&amp;speed=2&amp;t=0&amp;d=0&amp;u=0&amp;p=1&amp;b=0&amp;ic=9&amp;font=Verdana&amp;fontsize=19px&amp;bgcolor=&amp;color=000000&amp;type=typewriter&amp;su=1&amp;sub=1&amp;sw=1" frameborder="0" width="100%" height="6%" scrolling="no" allowtransparency="true"></iframe><noframes><div style="background-color: none transparent;"><a href="http://www.adamazer.com/" title="">amazon banners</a></div></noframes>
-
-      </div>
-
       <div class="row">
       <footer class="col-lg-12">
         <div class="row">
