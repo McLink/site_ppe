@@ -1,13 +1,10 @@
-<?php
-include("connexion_base.php");
-//include("connexion.php");
-session_start();
-if (isset($_SESSION['login']))
+<!--<?php 
+//session_start();
+//if (isset($_SESSION['login']))
 {
-    echo 'Bonjour ' . $_SESSION['login'];
+   // echo 'Bonjour ' . $_SESSION['login'];
 }
-
-?>
+?>!-->
 
 <!DOCTYPE html>
 <html lang="fr">
