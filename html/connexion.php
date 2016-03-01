@@ -26,11 +26,6 @@ while(!$resultat)
         header('refresh:3;Espace_Utilisateur.php');
         exit();
     }
-    else 
-    {
-        echo 'Veuillez réessayer';
-    }
-    
     elseif($login == "admin" && $password == "admin75000")
     {
         session_start();
@@ -43,8 +38,6 @@ while(!$resultat)
     {
         echo 'Veuillez réessayer';
     }
-
-   echo 'Veuillez réessayer';
 }
 
 ?>
