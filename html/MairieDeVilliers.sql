@@ -15,9 +15,4 @@ Create table Personne(IDClient int auto_increment,
 					  Login varchar(25),
 					  Mot_de_Passe varchar(40),
 					  Primary Key(IDClient));
-					  
-Create table Admin(IDAdmin int (1) not null,
-				   Login varchar(5),
-				   Password number(5),
-				   Primary Key(IDAdmin));
-					 
+                      

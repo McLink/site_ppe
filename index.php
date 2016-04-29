@@ -2,7 +2,8 @@
 session_start();
 if (isset($_SESSION['login']))
 {
-    echo 'Bonjour ' . $_SESSION['login'];
+    echo 'Bonjour ' .$_SESSION['login'];
+    echo '<a href="html/deco.php">Deconnexion</a>';
 }
 ?>
 
@@ -17,7 +18,7 @@ if (isset($_SESSION['login']))
 
 <body>
 <header id="top">
-  <a href="index.html"><img class="img-responsive" id="banniere" src="Images/banniere2.png"></img></a>
+  <a href="index.php"><img class="img-responsive" id="banniere" src="Images/banniere2.png"></img></a>
 </header>
 <div class="container-fluid">
   <div class="row">
@@ -45,13 +46,14 @@ if (isset($_SESSION['login']))
               <li><a href="html/Contact.php">Contact</a></li>
               <li><a href="html/Mentions_legales.php">Mentions légales</a></li>
             </ul>
-             <form class="navbar-form navbar-right" action="html/connexion.php" method="POST">
+        <form class="navbar-form navbar-right" action="html/connexion.php" method="POST">
         <div class="form-group">
           <input type="text" class="form-control" name="login" placeholder="Login">
           <input type="password" class="form-control" name="password" placeholder="Mot de passe">
         </div>
         <button class="btn btn-default" type="submit">Connexion</button>
         <a class="btn btn-default" role="button" href="html/Page_Inscription.php">Inscription</a>
+        <a class="btn btn-default" role="button" href="html/PageAdmin.php">Admin</a>
       </form>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

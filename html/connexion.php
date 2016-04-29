@@ -15,9 +15,7 @@ $req->execute(array(
 
 $resultat = $req->fetch();
 
-while(!$resultat)
-{
-    if($resultat)
+if($resultat)
     {
         session_start();
         $_SESSION['login'] = $login;
@@ -26,18 +24,9 @@ while(!$resultat)
         header('refresh:3;Espace_Utilisateur.php');
         exit();
     }
-    elseif($login == "admin" && $password == "admin75000")
-    {
-        session_start();
-        $_SESSION['login'] = $login;
-        echo 'Administrateur'. $login;
-        header('refresh:3;EspaceAdmin.php');
-        exit();
-    }
-    else 
+else 
     {
         echo 'Veuillez réessayer';
     }
-}
 
 ?>
