@@ -2,5 +2,3 @@
 .ajouter le champ nbEnfant sur la table Cantine puis le mettre à jour pour le champs
 .Créer un compte admin qui donne toutes les droites sur la base
 .Créer une vue (view) qui permet d'afficher le nombre d'inscrit par mois
-
-essai
