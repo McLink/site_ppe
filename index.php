@@ -3,6 +3,7 @@ session_start();
 if (isset($_SESSION['login']))
 {
     echo 'Bonjour ' .$_SESSION['login'];
+    echo '<a href="html/Espace_Utilisateur.php">Espace Utilisateur</a>';
     echo '<a href="html/deco.php">Deconnexion</a>';
 }
 ?>

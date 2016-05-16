@@ -10,23 +10,23 @@ $login=$_POST['login'];
 // Vérification des identifiants
 $req = $bdd->prepare('SELECT Login FROM personne WHERE Login  = :login AND  Mot_De_Passe = :password');
 $req->execute(array(
-    'login' => $login,
-    'password' => $password_hache));
+'login' => $login,
+'password' => $password_hache));
 
 $resultat = $req->fetch();
 
-if($resultat)
+if(!$resultat)
     {
-        session_start();
-        $_SESSION['login'] = $login;
-        echo 'Vous êtes connecté !';
-
-        header('refresh:3;Espace_Utilisateur.php');
-        exit();
+        echo 'Veuillez réessayer';
     }
 else 
     {
-        echo 'Veuillez réessayer';
+        session_start();
+        $_SESSION['login'] = $login;
+        echo 'Vous etes connecte !';
+
+        header('refresh:3;Espace_Utilisateur.php');
+        exit();
     }
 
 ?>

@@ -1,10 +1,9 @@
 <?php
-include("connexion_base.php");
-include("connexion.php");
 session_start();
 if (isset($_SESSION['login']))
 {
     echo 'Bonjour ' . $_SESSION['login'];
+    echo '<a href="html/deco.php">Deconnexion</a>';
 }
 
 ?>
@@ -20,7 +19,7 @@ if (isset($_SESSION['login']))
 
 <body>
 <header id="top">
-  <a href="../index.html"><img class="img-responsive" id="banniere" src="../Images/banniere2.png"></img></a>
+  <a href="../index.php"><img class="img-responsive" id="banniere" src="../Images/banniere2.png"></img></a>
 </header>
 <div class="container-fluid">
   <div class="row">
@@ -36,43 +35,94 @@ if (isset($_SESSION['login']))
           </button>
           <!--Ici il s'agit du bouton permettant de faire défiler le menu lorsqu'il est réglé pour les mobiles-->
         </div>
-    <?php
-//On verifie que lidentifiant de lutilisateur est defini
-if(isset($_GET['login'])){
-        $log = intval($_GET['login']);
-        //On verifie que lutilisateur existe
-        $request = mysql_query('select sexe, nom, prenom, datenaiss, adresse, cp, tel, email, login from Personne where login="'.$log.'"');
-        if(mysql_num_rows($req)>0){
-                $result = mysql_fetch_array($request);
-                //On affiche les donnees de lutilisateur
-?>
-Voici le profil de "<?php echo htmlentities($result['login']); ?>" :
-<table style="width:500px;">
-        <tr>
-        <td class="left"><h1><?php echo htmlentities($result['login'], ENT_QUOTES, 'UTF-8'); ?></h1>
-        Sexe: <?php echo htmlentities($result['sexe'], ENT_QUOTES, 'UTF-8'); ?><br />
-        Nom: <?php echo htmlentities($result['nom'], ENT_QUOTES, 'UTF-8'); ?><br />
-        Prénom: <?php echo htmlentities($result['prenom'], ENT_QUOTES, 'UTF-8'); ?><br />
-        Date de naissance: <?php echo htmlentities($result['datenaiss'], ENT_QUOTES, 'UTF-8'); ?><br />
-        Adresse: <?php echo htmlentities($result['adress'], ENT_QUOTES, 'UTF-8'); ?><br />
-        Code Postal: <?php echo htmlentities($result['cp'], ENT_QUOTES, 'UTF-8'); ?><br />
-        Téléphone: <?php echo htmlentities($result['tel'], ENT_QUOTES, 'UTF-8'); ?><br />
-        Email: <?php echo htmlentities($result['email'], ENT_QUOTES, 'UTF-8'); ?><br />
-        Login: <?php echo htmlentities($result['login'], ENT_QUOTES, 'UTF-8'); ?><br />
-        </td>
-    </tr>
-</table>
-<?php
-        }
-        else{
-            echo 'Cet utilisateur n\'existe pas.';
-        }
-}
-else{
-    echo 'L\'identifiant de l\'utilisateur n\'est pas d&eacute;fini.';
-}
-?>
 
+           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav" id="couleur">
+              <li class="active"><a href="../index.php">Accueil<span class="sr-only">(current)</span></a></li>
+              <!--Ici on indique que l'icome de la page courante est celle active(donc grisée)-->
+              <li><a href="../html/InscripEnfant.php">Inscription d'un enfant</a></li>
+              <li><a href="../html/InscripActivites.php">Inscription aux activités</a></li>
+              <li><a href="../html/Activites.php">Activités</a></li>
+
+            </ul>
+          </div>  
+        
+          <?php
+       include('connexion_base.php');
+       $IDClient=$_GET['IDClient']; 
+	   $sql="select * from personne where IDClient='$IDClient'";
+	   $result=mysql_query($sql);
+
+	   $ligne=mysql_fetch_array($result);
+                
+       $login=$ligne['login'];
+       $password=$ligne['password'];       
+	   $nom=$ligne['nom'];
+	   $prenom=$ligne['prenom'];
+       $sexe=$ligne['sexe'];
+	   $adresse=$ligne['adresse'];
+	   $cp=$ligne['cp'];
+	   $ville=$ligne['ville'];
+	   $email=$ligne['email'];
+       $tel=$ligne['telephone'];
+
+
+    echo "$login $password $nom $prenom $sexe $adresse $cp $ville $email $tel ";
+   
+          ?>
+    <!--<div class="container">
+         <h1>Profil</h1>
+            <div class="col-lg-10">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="form-group">
+                          <label for="nom">Pseudo</label>
+                      <?php echo $total['login']; ?>
+                        </div>
+                        <div class="form-group">
+                          <label for="nom">Mot de passe</label>
+                          <?php echo $total['password']; ?>
+                        </div>  
+                        <div class="form-group">
+                          <label for="nom">Nom</label>
+                           <?php echo $total['nom']; ?>
+                        </div>
+                        <div class="form-group">
+                          <label for="prenom">Prenom</label>
+                           <?php echo $total['prenom']; ?>
+                        </div>
+                        <div class="form-group"> 
+                          <label for="sexe">Sexe</label>
+                          <?php echo $total['sexe']; ?>
+                        </div>
+                        <div class="form-group">
+                        <label for="datanaiss">Date de naissance :</label>
+                       <?php echo $total['datenaiss']; ?>
+                        </div>
+                        <div class="form-group">
+                          <label for="adresse">Adresse</label>
+                           <?php echo $total['adresse']; ?>
+                        </div>
+                        <div class="form-group">
+                          <label for="cp">Code Postal</label>
+                           <?php echo $total['cp']; ?>
+                        </div>
+                        <div class="form-group">
+                          <label for="ville">Ville</label>
+                          <?php echo $total['ville']; ?>
+                        </div>
+                        <div class="form-group">
+                         <label for="email">Email</label>
+                         <?php echo $total['email']; ?>
+                        </div>
+                        <div class="form-group">
+                          <label for="tel">Telephone</label>
+                          <?php echo $total['tel']; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
    <div class="row">
       <footer class="col-lg-12">
         <div class="row">
@@ -84,9 +134,6 @@ else{
           </p>
         </a>
         </div>
-
-
-
       </footer>
     </div>
   </div>

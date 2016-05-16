@@ -238,7 +238,7 @@ else
 //@mysql_select_db($BD_base) or die("Impossible de se connecter à la base de données");
 
 //Requete d'envoi des données
-$requete = $bdd->prepare("UPDATE personne set sexe ='$sexe', nom='$nom', prenom='$prenom', datenaiss='$datenaiss', adresse='$adresse', cp='$cp', tel='$tel', email='$email', login='$login', password='$password' where login='$login'");
+$requete = $bdd->prepare("UPDATE personne set sexe ='$sexe', nom='$nom', prenom='$prenom', datenaiss='$datenaiss', adresse='$adresse', cp='$cp', tel='$tel', email='$email', login='$login', password='$password' from personne where login='$login'");
 $requete->execute(array(
 
 	'sexe'=>$sexe,
