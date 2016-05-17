@@ -1,11 +1,11 @@
 <?php
+ini_set('display_errors', 1);
 session_start();
-if (isset($_SESSION['login']))
+if(isset($_SESSION['login']))
 {
-    echo 'Bonjour ' . $_SESSION['login'];
-    echo '<a href="html/deco.php">Deconnexion</a>';
+    echo 'Bonjour'. $_SESSION['login'];
+    echo '<a href="deco.php">Deconnexion</a>';
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -48,81 +48,69 @@ if (isset($_SESSION['login']))
           </div>  
         
           <?php
-       include('connexion_base.php');
-       $IDClient=$_GET['IDClient']; 
-	   $sql="select * from personne where IDClient='$IDClient'";
-	   $result=mysql_query($sql);
-
-	   $ligne=mysql_fetch_array($result);
-                
-       $login=$ligne['login'];
-       $password=$ligne['password'];       
-	   $nom=$ligne['nom'];
-	   $prenom=$ligne['prenom'];
-       $sexe=$ligne['sexe'];
-	   $adresse=$ligne['adresse'];
-	   $cp=$ligne['cp'];
-	   $ville=$ligne['ville'];
-	   $email=$ligne['email'];
-       $tel=$ligne['telephone'];
-
-
-    echo "$login $password $nom $prenom $sexe $adresse $cp $ville $email $tel ";
-   
+          include("connexion_base.php");
+        if(isset($_GET['id'])){
+            $id = intval($_GET['id']);
+            $dn = mysql_query('SELECT * FROM personne WHERE id = "'.$id.'"');
+            if(mysql_num_rows(dn)>0)
+            {
+                $dnn = mysql_fetch_array($dn);
+            }
+        }
           ?>
-    <!--<div class="container">
+    <div class="container">
          <h1>Profil</h1>
             <div class="col-lg-10">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="form-group">
-                          <label for="nom">Pseudo</label>
-                      <?php echo $total['login']; ?>
+                          <label for="nom">Pseudo :</label>
+                      <?php echo htmlentities($dnn['login']); ?>
                         </div>
                         <div class="form-group">
-                          <label for="nom">Mot de passe</label>
-                          <?php echo $total['password']; ?>
+                          <label for="nom">Mot de passe :</label>
+                          <?php echo htmlentities($dnn['password']); ?>
                         </div>  
                         <div class="form-group">
                           <label for="nom">Nom</label>
-                           <?php echo $total['nom']; ?>
+                           <?php echo htmlentities($dnn['nom']); ?>
                         </div>
                         <div class="form-group">
                           <label for="prenom">Prenom</label>
-                           <?php echo $total['prenom']; ?>
+                           <?php echo htmlentities($dnn['prenom']); ?>
                         </div>
                         <div class="form-group"> 
                           <label for="sexe">Sexe</label>
-                          <?php echo $total['sexe']; ?>
+                          <?php echo htmlentities($dnn['sexe']); ?>
                         </div>
                         <div class="form-group">
                         <label for="datanaiss">Date de naissance :</label>
-                       <?php echo $total['datenaiss']; ?>
+                       <?php echo htmlentities($dnn['datenaiss']); ?>
                         </div>
                         <div class="form-group">
                           <label for="adresse">Adresse</label>
-                           <?php echo $total['adresse']; ?>
+                           <?php echo htmlentities($dnn['adresse']); ?>
                         </div>
                         <div class="form-group">
                           <label for="cp">Code Postal</label>
-                           <?php echo $total['cp']; ?>
+                           <?php echo htmlentities($dnn['cp']); ?>
                         </div>
                         <div class="form-group">
                           <label for="ville">Ville</label>
-                          <?php echo $total['ville']; ?>
+                         <?php echo htmlentities($dnn['ville']); ?>
                         </div>
                         <div class="form-group">
                          <label for="email">Email</label>
-                         <?php echo $total['email']; ?>
+                        <?php echo htmlentities($dnn['email']); ?>
                         </div>
                         <div class="form-group">
                           <label for="tel">Telephone</label>
-                          <?php echo $total['tel']; ?>
+                         <?php echo htmlentities($dnn['tel']); ?>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>-->
+        </div>
    <div class="row">
       <footer class="col-lg-12">
         <div class="row">
