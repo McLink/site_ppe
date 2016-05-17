@@ -1,4 +1,5 @@
 <?php
+include("connexion_base.php");
 ini_set('display_errors', 1);
 session_start();
 if(isset($_SESSION['login']))
@@ -6,6 +7,19 @@ if(isset($_SESSION['login']))
     echo 'Bonjour'. $_SESSION['login'];
     echo '<a href="deco.php">Deconnexion</a>';
 }
+
+$dnn = $_POST["dn"]; // test
+
+        if(isset($_GET['id'])){
+            $id = intval($_GET['id']);
+            $dn = mysql_query('SELECT * FROM personne WHERE id = "'.$id.'"');
+            if(mysql_num_rows(dn)>0)
+            {
+                $dnn = mysql_fetch_array($dn);
+            }
+        }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -47,17 +61,7 @@ if(isset($_SESSION['login']))
             </ul>
           </div>  
         
-          <?php
-          include("connexion_base.php");
-        if(isset($_GET['id'])){
-            $id = intval($_GET['id']);
-            $dn = mysql_query('SELECT * FROM personne WHERE id = "'.$id.'"');
-            if(mysql_num_rows(dn)>0)
-            {
-                $dnn = mysql_fetch_array($dn);
-            }
-        }
-          ?>
+         
     <div class="container">
          <h1>Profil</h1>
             <div class="col-lg-10">
@@ -65,7 +69,8 @@ if(isset($_SESSION['login']))
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="form-group">
                           <label for="nom">Pseudo :</label>
-                      <?php echo htmlentities($dnn['login']); ?>
+                      <?php 
+                      echo htmlentities($dnn["login"]); ?>
                         </div>
                         <div class="form-group">
                           <label for="nom">Mot de passe :</label>
