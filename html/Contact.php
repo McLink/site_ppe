@@ -1,3 +1,14 @@
+<?php 
+session_start();
+if (isset($_SESSION['login']))
+{
+    echo 'Bonjour ' .$_SESSION['login'];
+    echo ' <a href="html/Espace_Utilisateur.php">Espace Utilisateur</a>';
+    echo ' <a href="html/deco.php">Deconnexion</a>';
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -52,8 +63,7 @@
 <div class="row">
   <div class="col-lg-offset-2 col-lg-2">
     <address>
-      <strong>Contact</strong> <br>
-      <br> 
+      <legend>Contact</legend>
       <p>
       <strong>Pour nous contacter :</strong>
       <br/>

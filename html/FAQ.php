@@ -1,3 +1,14 @@
+<?php 
+session_start();
+if (isset($_SESSION['login']))
+{
+    echo 'Bonjour ' .$_SESSION['login'];
+    echo ' <a href="html/Espace_Utilisateur.php">Espace Utilisateur</a>';
+    echo ' <a href="html/deco.php">Deconnexion</a>';
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -61,13 +72,13 @@
 
   <ul> <!-- dl : élément structurel annonçant et encadrant une liste de définitions.-->
     <h2 class="question">Comment fait on pour s'inscrire et se connecter ?</h2> <!-- dt :élément contenant le terme à définir. -->
-    <li class="reponse">Pour s'inscrire il suffit d'aller sur la page <a href="Inscription.html">inscription</a> et de renseigner tout les renseignements demandé puis pour ce connecter, renseignez votre identifiant et votre mot de passe en haut à droite.  </li> <!-- dd : élément contenant la description du terme précédemment écrit. -->
+    <li class="reponse">Pour s'inscrire il suffit d'aller sur la page <a href="Page_Inscription.php">inscription</a> et de renseigner tout les renseignements demandé puis pour ce connecter, renseignez votre identifiant et votre mot de passe en haut à droite.  </li> <!-- dd : élément contenant la description du terme précédemment écrit. -->
     <!--fausse page inscription a changer quand ça sera fait -->
      <!--fausse page connexion a changer quand ça sera fait -->
 
     <br/>
     <h2 class="question">Comment vous contacter ?</h2>
-    <li class="reponse">Pour nous contacter c'est très simple, il suffit de cliquer sur  <a href="Contact.html">ce lien</a> puis vous avez toutes nos coordonnées avec un formulaire de contact directement sur le site.</li>
+    <li class="reponse">Pour nous contacter c'est très simple, il suffit de cliquer sur  <a href="Contact.php">ce lien</a> puis vous avez toutes nos coordonnées avec un formulaire de contact directement sur le site.</li>
     <br/>
     <h2 class="question">Quels sont vos horaires d'ouverture ?</h2>
     <li class="reponse"> 
@@ -111,18 +122,21 @@
   </div>
 </div>
 
-      <div class="row">
+        <div class="row">
       <footer class="col-lg-12">
         <div class="row">
           <p class="col-lg-8">
-            Ce site a été créé par Chung Steven et Quentin Vilcoque.
+           Ce site a été créé par Chung Steven et Quentin Vilcoque, Man Sophervuth, Malekama Dominique.
           </p>
-          <a href="#top">
-          <p class="col-lg-offset-2 col-lg-2">Haut de page</p>
-          </a>
+          <a href="#top"><p class="col-lg-offset-2 col-lg-2">
+            Haut de page 
+          </p>
+        </a>
         </div>
+
+
       </footer>
-      </div>
+    </div>
   </div>
     <script src="../js/jquery-1.11.2.js"></script>
     <script src="../js/bootstrap.min.js"></script>

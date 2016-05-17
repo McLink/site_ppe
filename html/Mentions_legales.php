@@ -1,3 +1,14 @@
+<?php 
+session_start();
+if (isset($_SESSION['login']))
+{
+    echo 'Bonjour ' .$_SESSION['login'];
+    echo ' <a href="html/Espace_Utilisateur.php">Espace Utilisateur</a>';
+    echo ' <a href="html/deco.php">Deconnexion</a>';
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -93,17 +104,19 @@
           </div>
         </section>
       </div>
-    <div class="row"> 
+     <div class="row">
       <footer class="col-lg-12">
         <div class="row">
           <p class="col-lg-8">
-            Ce site a été créé par Chung Steven et Quentin Vilcoque, Man Sophervuth, Malekama Dominique.
+           Ce site a été créé par Chung Steven et Quentin Vilcoque, Man Sophervuth, Malekama Dominique.
           </p>
           <a href="#top"><p class="col-lg-offset-2 col-lg-2">
             Haut de page 
           </p>
         </a>
         </div>
+
+
       </footer>
     </div>
 
