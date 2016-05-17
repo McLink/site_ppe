@@ -38,21 +38,19 @@ if(isset($_SESSION['login']))
 
            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav" id="couleur">
-              <li class="active"><a href="../index.php">Accueil</a></li>
+              <li class="active"><a href="Espace_Utilisateur.php">Profil</a></li>
               <!--Ici on indique que l'icome de la page courante est celle active(donc grisée)-->
               <li><a href="../html/InscripEnfant.php">Inscription d'un enfant</a></li>
               <li><a href="../html/InscripActivites.php">Inscription aux activités</a></li>
-              <li><a href="../html/Activites.php">Activités</a></li>
-              <li><a href="../html/Enfant.php">Enfant(s)</a></li>
-
+                <li><a href="../html/Activites.php">Activités</a></li>
             </ul>
           </div>  
         
           <?php
           include("connexion_base.php");
-          if(isset($_GET['Login'])){
-            $id = intval($_GET['Login']);
-            $dn = mysql_query('SELECT Sexe, Nom, Prenom, Adresse, CP, Ville, Email, Tel, Login, Mot_de_Passe FROM personne WHERE login = "'.$Login.'"');
+          if(isset($_GET['login'])){
+            $id = intval($_GET['name']);
+            $dn = mysql_query('SELECT * FROM enfant WHERE name = "'.$name.'"');
             if(mysql_num_rows(dn)>0)
             {
                 $dnn = mysql_fetch_array($dn);
@@ -64,14 +62,6 @@ if(isset($_SESSION['login']))
             <div class="col-lg-10">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
-                        <div class="form-group">
-                          <label for="nom">Pseudo :</label>
-                      <?php echo htmlentities($dnn['login']); ?>
-                        </div>
-                        <div class="form-group">
-                          <label for="nom">Mot de passe :</label>
-                          <?php echo htmlentities($dnn['password']); ?>
-                        </div>  
                         <div class="form-group">
                           <label for="nom">Nom</label>
                            <?php echo htmlentities($dnn['nom']); ?>
@@ -87,26 +77,6 @@ if(isset($_SESSION['login']))
                         <div class="form-group">
                         <label for="datanaiss">Date de naissance :</label>
                        <?php echo htmlentities($dnn['datenaiss']); ?>
-                        </div>
-                        <div class="form-group">
-                          <label for="adresse">Adresse</label>
-                           <?php echo htmlentities($dnn['adresse']); ?>
-                        </div>
-                        <div class="form-group">
-                          <label for="cp">Code Postal</label>
-                           <?php echo htmlentities($dnn['cp']); ?>
-                        </div>
-                        <div class="form-group">
-                          <label for="ville">Ville</label>
-                         <?php echo htmlentities($dnn['ville']); ?>
-                        </div>
-                        <div class="form-group">
-                         <label for="email">Email</label>
-                        <?php echo htmlentities($dnn['email']); ?>
-                        </div>
-                        <div class="form-group">
-                          <label for="tel">Telephone</label>
-                         <?php echo htmlentities($dnn['tel']); ?>
                         </div>
                     </div>
                 </div>

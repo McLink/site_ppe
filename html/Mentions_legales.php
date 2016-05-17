@@ -55,6 +55,7 @@ if (isset($_SESSION['login']))
         </div>
         <button class="btn btn-default" type="submit">Connexion</button>
         <a class="btn btn-default" role="button" href="Page_Inscription.php">Inscription</a>
+        <a class="btn btn-default" role="button" href="html/PageAdmin.php">Admin</a>
       </form>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
