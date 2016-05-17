@@ -84,8 +84,8 @@ else
 //@mysql_select_db($BD_base) or die("Impossible de se connecter à la base de données");
 
 //Requete d'envoi des données
-$requete = $bdd->prepare("INSERT INTO enfant( Nom, Prenom, Datenaiss, Sexe) 
-	VALUES(:nom, :prenom, :datenaiss, :sexe,);");
+$requete = $bdd->prepare("INSERT INTO enfant(Nom, Prenom, Datenaiss, Sexe) 
+	VALUES(:nom, :prenom, :datenaiss, :sexe);");
 $requete->execute(array(
 
 	'nom'=>$nom,
