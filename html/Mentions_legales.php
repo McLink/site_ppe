@@ -43,9 +43,9 @@ if (isset($_SESSION['login']))
       <ul class="nav navbar-nav" id="couleur">
         <li><a href="../index.php">Accueil</a></li>
         <!--Ici on indique que l'icome de la page courante est celle active(donc grisée)-->
-        <li><a href="../html/Services.php">Services</a></li>
-        <li><a href="../html/FAQ.php">FAQ</a><li>
-        <li><a href="../html/Contact.php">Contact</a><li>
+        <li><a href="Services.php">Services</a></li>
+        <li><a href="FAQ.php">FAQ</a><li>
+        <li><a href="Contact.php">Contact</a><li>
         <li class="active"><a href="Mentions_legales.php">Mentions légales<span class="sr-only">(current)</span></a></li>
       </ul>
       <form class="navbar-form navbar-right" action="ConnexionAdmin.php" action="connexion.php" method="POST">

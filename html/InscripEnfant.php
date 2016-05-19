@@ -42,8 +42,8 @@ if(isset($_SESSION['login']))
       <ul class="nav navbar-nav" id="couleur">
         <li><a href="Espace_Utilisateur.php">Profil</a></li>
         <!--Ici on indique que l'icome de la page courante est celle active(donc grisée)-->
-        <li><a href="Activites.php">Activités</a></li>
         <li><a href="InscripActivites.php">Inscriptions aux activités</a></li>
+        <li><a href="Activites.php">Activités</a></li>
         <li><a href="../html/Enfant.php">Enfant(s)</a></li>
       </ul>
      <!--<form class="navbar-form navbar-right" action="connexion.php" method="POST">

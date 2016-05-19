@@ -16,7 +16,6 @@ if(isset($_SESSION['login']))
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/tuto.css" rel="stylesheet">
   </head>
-
 <body>
 <header id="top">
   <a href="../index.php"><img class="img-responsive" id="banniere" src="../Images/banniere2.png"></img></a>
@@ -35,7 +34,6 @@ if(isset($_SESSION['login']))
           </button>
           <!--Ici il s'agit du bouton permettant de faire défiler le menu lorsqu'il est réglé pour les mobiles-->
         </div>
-
            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav" id="couleur">
               <li class="active"><a href="../index.php">Accueil</a></li>
@@ -44,21 +42,22 @@ if(isset($_SESSION['login']))
               <li><a href="../html/InscripActivites.php">Inscription aux activités</a></li>
               <li><a href="../html/Activites.php">Activités</a></li>
               <li><a href="../html/Enfant.php">Enfant(s)</a></li>
-
             </ul>
           </div>  
         
           <?php
           include("connexion_base.php");
-          if(isset($_GET['Login'])){
+          if(isset($_SESSION['Login']))
+          {
             $id = intval($_GET['Login']);
             $dn = mysql_query('SELECT Sexe, Nom, Prenom, Adresse, CP, Ville, Email, Tel, Login, Mot_de_Passe FROM personne WHERE login = "'.$Login.'"');
             if(mysql_num_rows(dn)>0)
             {
                 $dnn = mysql_fetch_array($dn);
             }
-        }
+          }
           ?>
+    <section id="contact">   
     <div class="container">
          <h1>Profil</h1>
             <div class="col-lg-10">
@@ -112,6 +111,7 @@ if(isset($_SESSION['login']))
                 </div>
             </div>
         </div>
+    </section>   
    <div class="row">
       <footer class="col-lg-12">
         <div class="row">
@@ -126,12 +126,17 @@ if(isset($_SESSION['login']))
       </footer>
     </div>
   </div>
-
     <script src="../js/jquery-1.11.2.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    <!-- Ici se trouve des fichiers Javascript nécessaires (notamment la librairie jQuery) -->
-  
+    <script type="text/javascript">
+      $('a[href^="#top"]').click(function(){
+      var the_id = $(this).attr("href");
 
-  </body>
-    
+      $('html, body').animate({
+        scrollTop:$(the_id).offset().top
+      }, 'slow');
+      return false;
+      });
+    </script>
+  </body> 
 </html>

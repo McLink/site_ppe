@@ -124,30 +124,6 @@ if (isset($_SESSION['login']))
   <div class="col-lg-offset-2 col-lg-8 col-lg-offset-2">
     <form method="post" action="">
       <div class="form-group">
-        <label for="Nom">Nom</label>
-        <input type="text" class="form-control" id="Nom" placeholder="Entrez votre Nom">
-      </div>
-      <div class="form-group">
-        <label for="Prenom">Prenom</label>
-        <input type="text" class="form-control" id="Prenom" placeholder="Entrez votre Prenom">
-      </div>
-      <div class="form-group">
-        <label for="Adresse">Adresse</label>
-        <input type="text" class="form-control" id="Adresse" placeholder="Entrez votre Adresse">
-      </div>
-      <div class="form-group">
-        <label for="CP">CP</label>
-        <input type="numbers" class="form-control" id="CP" placeholder="Entrez votre CP">
-      </div>
-      <div class="form-group">
-        <label for="Ville">Ville</label>
-        <input type="text" class="form-control" id="Ville" placeholder="Entrez votre ville">
-      </div>
-      <div class="form-group">
-        <label for="Telephone">Telephone</label>
-        <input type="numbers" class="form-control" id="Telephone" placeholder="Entrez votre numéro de télephone">
-      </div>
-      <div class="form-group">
         <label for="Email">Email</label>
         <input type="text" class="form-control" id="Email" placeholder="Entrez votre adresse email">
       </div>
@@ -161,7 +137,6 @@ if (isset($_SESSION['login']))
   </div>
 </div>
 <br/>
-
     <div class="row">
       <footer class="col-lg-12">
         <div class="row">
@@ -173,12 +148,9 @@ if (isset($_SESSION['login']))
           </p>
         </a>
         </div>
-
-
       </footer>
     </div>
   </div>
-
     <script src="../js/jquery-1.11.2.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <!-- Ici se trouve des fichiers Javascript nécessaires (notamment la librairie jQuery) -->
