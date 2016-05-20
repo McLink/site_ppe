@@ -1,294 +1,259 @@
 DROP Database MairieDeVilliers;
 CREATE Database MairieDeVilliers;
 use MairieDeVilliers;
--- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
---
--- Host: localhost    Database: ppe
--- ------------------------------------------------------
--- Server version	5.6.17
+# -----------------------------------------------------------------------------
+#       TABLE : PERSONNE
+# -----------------------------------------------------------------------------
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE TABLE IF NOT EXISTS PERSONNE
+ (
+   IDCLIENT int not null auto_increment ,
+   CODECAT CHAR(32) NOT NULL  ,
+   SEXE VARCHAR(15) NULL  ,
+   NOM VARCHAR(35) NULL  ,
+   PRENOM VARCHAR(35) NULL  ,
+   DATENAISS DATE NULL  ,
+   ADRESSE VARCHAR(60) NULL  ,
+   CP VARCHAR(6) NULL  ,
+   TEL VARCHAR(10) NULL  ,
+   EMAIL VARCHAR(50) NULL  
+   , PRIMARY KEY (IDCLIENT) 
+ ) 
+ comment = "";
 
---
--- Table structure for table `cantine`
---
+# -----------------------------------------------------------------------------
+#       INDEX DE LA TABLE PERSONNE
+# -----------------------------------------------------------------------------
 
-DROP TABLE IF EXISTS `cantine`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `cantine` (
-  `IDINSCRIT` char(4) NOT NULL,
-  `CODEPERIODE` char(32) NOT NULL,
-  `ETABLISSEMENT` varchar(32) DEFAULT NULL,
-  `DATEINSCRIPTION` date DEFAULT NULL,
-  `CAPACITE` char(32) DEFAULT NULL,
-  `NBENFANT` int(11) DEFAULT NULL,
-  PRIMARY KEY (`IDINSCRIT`),
-  KEY `I_FK_CANTINE_PERIODE_CANTINE` (`CODEPERIODE`),
-  CONSTRAINT `cantine_ibfk_1` FOREIGN KEY (`CODEPERIODE`) REFERENCES `periode_cantine` (`CODEPERIODE`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `cantine`
---
+CREATE  INDEX I_FK_PERSONNE_CATEGORIEPRO
+     ON PERSONNE (CODECAT ASC);
 
-LOCK TABLES `cantine` WRITE;
-/*!40000 ALTER TABLE `cantine` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cantine` ENABLE KEYS */;
-UNLOCK TABLES;
+# -----------------------------------------------------------------------------
+#       TABLE : CANTINE
+# -----------------------------------------------------------------------------
 
---
--- Table structure for table `categoriepro`
---
+CREATE TABLE IF NOT EXISTS CANTINE
+ (
+   IDINSCRIT char(4) NOT NULL  ,
+   CODEPERIODE CHAR(32) NOT NULL  ,
+   ETABLISSEMENT VARCHAR(32) NULL  ,
+   DATEINSCRIPTION date NULL  ,
+   CAPACITE CHAR(32) NULL  ,
+   NBENFANT INTEGER NULL  
+   , PRIMARY KEY (IDINSCRIT) 
+ ) 
+ comment = "";
 
-DROP TABLE IF EXISTS `categoriepro`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `categoriepro` (
-  `CODECAT` char(32) NOT NULL,
-  `LIBELLECAT` varchar(32) DEFAULT NULL,
-  PRIMARY KEY (`CODECAT`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+# -----------------------------------------------------------------------------
+#       INDEX DE LA TABLE CANTINE
+# -----------------------------------------------------------------------------
 
---
--- Dumping data for table `categoriepro`
---
 
-LOCK TABLES `categoriepro` WRITE;
-/*!40000 ALTER TABLE `categoriepro` DISABLE KEYS */;
-/*!40000 ALTER TABLE `categoriepro` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE  INDEX I_FK_CANTINE_PERIODE_CANTINE
+     ON CANTINE (CODEPERIODE ASC);
 
---
--- Table structure for table `centre_de_loisirs`
---
+# -----------------------------------------------------------------------------
+#       TABLE : CENTRE_DE_LOISIRS
+# -----------------------------------------------------------------------------
 
-DROP TABLE IF EXISTS `centre_de_loisirs`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `centre_de_loisirs` (
-  `IDINSCRIT` char(32) NOT NULL,
-  `ECOLE` char(32) DEFAULT NULL,
-  `DATEINSCRIPTIONS` date DEFAULT NULL,
-  `REGION` char(32) DEFAULT NULL,
-  `CAPACITE` char(32) DEFAULT NULL,
-  PRIMARY KEY (`IDINSCRIT`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE IF NOT EXISTS CENTRE_DE_LOISIRS
+ (
+   IDINSCRIT CHAR(32) NOT NULL  ,
+   ECOLE CHAR(32) NULL  ,
+   DATEINSCRIPTIONS DATE NULL  ,
+   REGION CHAR(32) NULL  ,
+   CAPACITE CHAR(32) NULL  
+   , PRIMARY KEY (IDINSCRIT) 
+ ) 
+ comment = "";
 
---
--- Dumping data for table `centre_de_loisirs`
---
+# -----------------------------------------------------------------------------
+#       TABLE : PERIODE_CANTINE
+# -----------------------------------------------------------------------------
 
-LOCK TABLES `centre_de_loisirs` WRITE;
-/*!40000 ALTER TABLE `centre_de_loisirs` DISABLE KEYS */;
-/*!40000 ALTER TABLE `centre_de_loisirs` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE TABLE IF NOT EXISTS PERIODE_CANTINE
+ (
+   CODEPERIODE CHAR(32) NOT NULL  ,
+   DATEDEBUT date NULL  ,
+   DATEFIN date NULL  ,
+   TARIF CHAR(32) NULL  
+   , PRIMARY KEY (CODEPERIODE) 
+ ) 
+ comment = "";
 
---
--- Table structure for table `employe`
---
+# -----------------------------------------------------------------------------
+#       TABLE : FORMULAIRE
+# -----------------------------------------------------------------------------
 
-DROP TABLE IF EXISTS `employe`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `employe` (
-  `IDEMPLOYE` char(6) NOT NULL,
-  `CIVILITE` varchar(4) DEFAULT NULL,
-  `NOM` varchar(35) DEFAULT NULL,
-  `PRENOM` varchar(35) DEFAULT NULL,
-  `DATENAISS` date DEFAULT NULL,
-  `ADRESSE` varchar(60) DEFAULT NULL,
-  `CP` varchar(6) DEFAULT NULL,
-  `TEL` varchar(10) DEFAULT NULL,
-  `EMAIL` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`IDEMPLOYE`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE IF NOT EXISTS FORMULAIRE
+ (
+   IDFORM CHAR(32) NOT NULL  ,
+   IDEMPLOYE CHAR(6) NOT NULL  ,
+   IDCLIENT int NOT NULL  ,
+   CATEGORIE CHAR(32) NULL  ,
+   ADRESSERESIDENCE VARCHAR(32) NULL  ,
+   MOTIF CHAR(32) NULL  
+   , PRIMARY KEY (IDFORM) 
+ ) 
+ comment = "";
 
---
--- Dumping data for table `employe`
---
+# -----------------------------------------------------------------------------
+#       INDEX DE LA TABLE FORMULAIRE
+# -----------------------------------------------------------------------------
 
-LOCK TABLES `employe` WRITE;
-/*!40000 ALTER TABLE `employe` DISABLE KEYS */;
-/*!40000 ALTER TABLE `employe` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Table structure for table `enfants`
---
+CREATE  INDEX I_FK_FORMULAIRE_EMPLOYE
+     ON FORMULAIRE (IDEMPLOYE ASC);
 
-DROP TABLE IF EXISTS `enfants`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `enfants` (
-  `IDENF` varchar(4) NOT NULL,
-  `IDCLIENT` int(11) NOT NULL,
-  `IDINSCRIT` varchar(4) NOT NULL,
-  `IDCLIENT_1` char(6) NOT NULL,
-  `IDEMPLOYE` char(6) NOT NULL,
-  `NOM` varchar(40) DEFAULT NULL,
-  `PRENOM` varchar(40) DEFAULT NULL,
-  `DATEN` date DEFAULT NULL,
-  `SEXE` varchar(1) DEFAULT NULL,
-  PRIMARY KEY (`IDENF`),
-  KEY `I_FK_ENFANTS_PERSONNE` (`IDCLIENT`),
-  KEY `I_FK_ENFANTS_CANTINE` (`IDINSCRIT`),
-  KEY `I_FK_ENFANTS_PERSONNE_2` (`IDCLIENT_1`),
-  KEY `I_FK_ENFANTS_EMPLOYE` (`IDEMPLOYE`),
-  CONSTRAINT `enfants_ibfk_3` FOREIGN KEY (`IDEMPLOYE`) REFERENCES `employe` (`IDEMPLOYE`),
-  CONSTRAINT `enfants_ibfk_1` FOREIGN KEY (`IDCLIENT`) REFERENCES `personne` (`IDCLIENT`),
-  CONSTRAINT `enfants_ibfk_2` FOREIGN KEY (`IDINSCRIT`) REFERENCES `cantine` (`IDINSCRIT`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE UNIQUE INDEX I_FK_FORMULAIRE_PERSONNE
+     ON FORMULAIRE (IDCLIENT ASC);
 
---
--- Dumping data for table `enfants`
---
+# -----------------------------------------------------------------------------
+#       TABLE : CATEGORIEPRO
+# -----------------------------------------------------------------------------
 
-LOCK TABLES `enfants` WRITE;
-/*!40000 ALTER TABLE `enfants` DISABLE KEYS */;
-/*!40000 ALTER TABLE `enfants` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE TABLE IF NOT EXISTS CATEGORIEPRO
+ (
+   CODECAT CHAR(32) NOT NULL  ,
+   LIBELLECAT varchar(32) NULL  
+   , PRIMARY KEY (CODECAT) 
+ ) 
+ comment = "";
 
---
--- Table structure for table `formulaire`
---
+# -----------------------------------------------------------------------------
+#       TABLE : EMPLOYE
+# -----------------------------------------------------------------------------
 
-DROP TABLE IF EXISTS `formulaire`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `formulaire` (
-  `IDFORM` char(32) NOT NULL,
-  `IDEMPLOYE` char(6) NOT NULL,
-  `IDCLIENT` int(11) NOT NULL,
-  `CATEGORIE` char(32) DEFAULT NULL,
-  `ADRESSERESIDENCE` varchar(32) DEFAULT NULL,
-  `MOTIF` char(32) DEFAULT NULL,
-  PRIMARY KEY (`IDFORM`),
-  UNIQUE KEY `I_FK_FORMULAIRE_PERSONNE` (`IDCLIENT`),
-  KEY `I_FK_FORMULAIRE_EMPLOYE` (`IDEMPLOYE`),
-  CONSTRAINT `formulaire_ibfk_2` FOREIGN KEY (`IDCLIENT`) REFERENCES `personne` (`IDCLIENT`),
-  CONSTRAINT `formulaire_ibfk_1` FOREIGN KEY (`IDEMPLOYE`) REFERENCES `employe` (`IDEMPLOYE`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE IF NOT EXISTS EMPLOYE
+ (
+   IDEMPLOYE CHAR(6) NOT NULL  ,
+   CIVILITE VARCHAR(4) NULL  ,
+   NOM VARCHAR(35) NULL  ,
+   PRENOM VARCHAR(35) NULL  ,
+   DATENAISS DATE NULL  ,
+   ADRESSE VARCHAR(60) NULL  ,
+   CP VARCHAR(6) NULL  ,
+   TEL VARCHAR(10) NULL  ,
+   EMAIL VARCHAR(50) NULL  
+   , PRIMARY KEY (IDEMPLOYE) 
+ ) 
+ comment = "";
 
---
--- Dumping data for table `formulaire`
---
+# -----------------------------------------------------------------------------
+#       TABLE : ENFANTS
+# -----------------------------------------------------------------------------
 
-LOCK TABLES `formulaire` WRITE;
-/*!40000 ALTER TABLE `formulaire` DISABLE KEYS */;
-/*!40000 ALTER TABLE `formulaire` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE TABLE IF NOT EXISTS ENFANTS
+ (
+   IDENF VARCHAR(4) NOT NULL  ,
+   IDCLIENT int NOT NULL  ,
+   IDINSCRIT VARCHAR(4) NOT NULL  ,
+   IDCLIENT_1 CHAR(6) NOT NULL  ,
+   IDEMPLOYE CHAR(6) NOT NULL  ,
+   NOM VARCHAR(40) NULL  ,
+   PRENOM VARCHAR(40) NULL  ,
+   DATEN DATE NULL  ,
+   SEXE VARCHAR(1) NULL  
+   , PRIMARY KEY (IDENF) 
+ ) 
+ comment = "";
 
---
--- Table structure for table `inscrire2`
---
+# -----------------------------------------------------------------------------
+#       INDEX DE LA TABLE ENFANTS
+# -----------------------------------------------------------------------------
 
-DROP TABLE IF EXISTS `inscrire2`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `inscrire2` (
-  `IDINSCRIT` char(32) NOT NULL,
-  `IDCLIENT` int(11) NOT NULL,
-  `DATEINSCRIPTION` date DEFAULT NULL,
-  `DATEFINABONNEMENT` date DEFAULT NULL,
-  `TARIF` char(32) DEFAULT NULL,
-  PRIMARY KEY (`IDINSCRIT`,`IDCLIENT`),
-  KEY `I_FK_INSCRIRE2_CENTRE_DE_LOISIRS` (`IDINSCRIT`),
-  KEY `I_FK_INSCRIRE2_PERSONNE` (`IDCLIENT`),
-  CONSTRAINT `inscrire2_ibfk_2` FOREIGN KEY (`IDCLIENT`) REFERENCES `personne` (`IDCLIENT`),
-  CONSTRAINT `inscrire2_ibfk_1` FOREIGN KEY (`IDINSCRIT`) REFERENCES `centre_de_loisirs` (`IDINSCRIT`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `inscrire2`
---
+CREATE  INDEX I_FK_ENFANTS_PERSONNE
+     ON ENFANTS (IDCLIENT ASC);
 
-LOCK TABLES `inscrire2` WRITE;
-/*!40000 ALTER TABLE `inscrire2` DISABLE KEYS */;
-/*!40000 ALTER TABLE `inscrire2` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE  INDEX I_FK_ENFANTS_CANTINE
+     ON ENFANTS (IDINSCRIT ASC);
 
---
--- Table structure for table `periode_cantine`
---
+CREATE  INDEX I_FK_ENFANTS_PERSONNE_2
+     ON ENFANTS (IDCLIENT_1 ASC);
 
-DROP TABLE IF EXISTS `periode_cantine`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `periode_cantine` (
-  `CODEPERIODE` char(32) NOT NULL,
-  `DATEDEBUT` date DEFAULT NULL,
-  `DATEFIN` date DEFAULT NULL,
-  `TARIF` char(32) DEFAULT NULL,
-  PRIMARY KEY (`CODEPERIODE`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE  INDEX I_FK_ENFANTS_EMPLOYE
+     ON ENFANTS (IDEMPLOYE ASC);
 
---
--- Dumping data for table `periode_cantine`
---
+# -----------------------------------------------------------------------------
+#       TABLE : INSCRIRE2
+# -----------------------------------------------------------------------------
 
-LOCK TABLES `periode_cantine` WRITE;
-/*!40000 ALTER TABLE `periode_cantine` DISABLE KEYS */;
-/*!40000 ALTER TABLE `periode_cantine` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE TABLE IF NOT EXISTS INSCRIRE2
+ (
+   IDINSCRIT CHAR(32) NOT NULL  ,
+   IDCLIENT int NOT NULL  ,
+   DATEINSCRIPTION date NULL  ,
+   DATEFINABONNEMENT date NULL  ,
+   TARIF CHAR(32) NULL  
+   , PRIMARY KEY (IDINSCRIT,IDCLIENT) 
+ ) 
+ comment = "";
 
---
--- Table structure for table `personne`
---
+# -----------------------------------------------------------------------------
+#       INDEX DE LA TABLE INSCRIRE2
+# -----------------------------------------------------------------------------
 
-DROP TABLE IF EXISTS `personne`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `personne` (
-  `IDCLIENT` int(11) NOT NULL AUTO_INCREMENT,
-  `CODECAT` char(32) NOT NULL,
-  `SEXE` varchar(15) DEFAULT NULL,
-  `NOM` varchar(35) DEFAULT NULL,
-  `PRENOM` varchar(35) DEFAULT NULL,
-  `DATENAISS` date DEFAULT NULL,
-  `ADRESSE` varchar(60) DEFAULT NULL,
-  `CP` varchar(6) DEFAULT NULL,
-  `TEL` varchar(10) DEFAULT NULL,
-  `EMAIL` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`IDCLIENT`),
-  KEY `I_FK_PERSONNE_CATEGORIEPRO` (`CODECAT`),
-  CONSTRAINT `personne_ibfk_1` FOREIGN KEY (`CODECAT`) REFERENCES `categoriepro` (`CODECAT`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `personne`
---
+CREATE  INDEX I_FK_INSCRIRE2_CENTRE_DE_LOISIRS
+     ON INSCRIRE2 (IDINSCRIT ASC);
 
-LOCK TABLES `personne` WRITE;
-/*!40000 ALTER TABLE `personne` DISABLE KEYS */;
-/*!40000 ALTER TABLE `personne` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+CREATE  INDEX I_FK_INSCRIRE2_PERSONNE
+     ON INSCRIRE2 (IDCLIENT ASC);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-19 13:36:04
+# -----------------------------------------------------------------------------
+#       CREATION DES REFERENCES DE TABLE
+# -----------------------------------------------------------------------------
+
+
+ALTER TABLE PERSONNE 
+  ADD FOREIGN KEY FK_PERSONNE_CATEGORIEPRO (CODECAT)
+      REFERENCES CATEGORIEPRO (CODECAT) ;
+
+
+ALTER TABLE CANTINE 
+  ADD FOREIGN KEY FK_CANTINE_PERIODE_CANTINE (CODEPERIODE)
+      REFERENCES PERIODE_CANTINE (CODEPERIODE) ;
+
+
+ALTER TABLE FORMULAIRE 
+  ADD FOREIGN KEY FK_FORMULAIRE_EMPLOYE (IDEMPLOYE)
+      REFERENCES EMPLOYE (IDEMPLOYE) ;
+
+
+ALTER TABLE FORMULAIRE 
+  ADD FOREIGN KEY FK_FORMULAIRE_PERSONNE (IDCLIENT)
+      REFERENCES PERSONNE (IDCLIENT) ;
+
+
+ALTER TABLE ENFANTS 
+  ADD FOREIGN KEY FK_ENFANTS_PERSONNE (IDCLIENT)
+      REFERENCES PERSONNE (IDCLIENT) ;
+
+
+ALTER TABLE ENFANTS 
+  ADD FOREIGN KEY FK_ENFANTS_CANTINE (IDINSCRIT)
+      REFERENCES CANTINE (IDINSCRIT) ;
+
+
+ALTER TABLE ENFANTS 
+  ADD FOREIGN KEY FK_ENFANTS_PERSONNE_2 (IDCLIENT_1)
+      REFERENCES PERSONNE (IDCLIENT) ;
+
+
+ALTER TABLE ENFANTS 
+  ADD FOREIGN KEY FK_ENFANTS_EMPLOYE (IDEMPLOYE)
+      REFERENCES EMPLOYE (IDEMPLOYE) ;
+
+
+ALTER TABLE INSCRIRE2 
+  ADD FOREIGN KEY FK_INSCRIRE2_CENTRE_DE_LOISIRS (IDINSCRIT)
+      REFERENCES CENTRE_DE_LOISIRS (IDINSCRIT) ;
+
+
+ALTER TABLE INSCRIRE2 
+  ADD FOREIGN KEY FK_INSCRIRE2_PERSONNE (IDCLIENT)
+      REFERENCES PERSONNE (IDCLIENT) ;
+
