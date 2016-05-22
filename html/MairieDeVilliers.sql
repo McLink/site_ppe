@@ -65,8 +65,8 @@ Create table if not exists Identifiant
 (
   IDLogin int not null auto_increment ,
   MotDePasse varchar(15),
-  IDClient int(3) not null,
-  Primary Key(IDLogin,IDClient),
+  IDClient int not null,
+  Primary Key(IDLogin),
   Foreign Key(IDClient) References Personne(IDClient)
 );
 
