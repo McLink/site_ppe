@@ -61,11 +61,14 @@ CREATE  INDEX I_FK_CANTINE_PERIODE_CANTINE
 #       TABLE : Identifiant
 # -----------------------------------------------------------------------------
 
-Create table Identifiant(IDLogin int(3) not null,
-             MotDePasse varchar(15),
-             IDClient int(3) not null,
-             Primary Key(IDLogin,IDClient),
-             Foreign Key(IDClient) References Personne(IDClient));
+Create table if not exists Identifiant
+(
+  IDLogin int not null auto_increment ,
+  MotDePasse varchar(15),
+  IDClient int(3) not null,
+  Primary Key(IDLogin,IDClient),
+  Foreign Key(IDClient) References Personne(IDClient)
+);
 
 
 # -----------------------------------------------------------------------------
