@@ -274,4 +274,10 @@ ALTER TABLE INSCRIRE2
 ALTER TABLE INSCRIRE2 
   ADD FOREIGN KEY FK_INSCRIRE2_PERSONNE (IDCLIENT)
       REFERENCES PERSONNE (IDCLIENT) ;
+      
+# -----------------------------------------------------------------------------
+#       conversion de la base en utf8
+# -----------------------------------------------------------------------------
+
+ALTER DATABASE MairieDeVilliers charset=utf8;
 
