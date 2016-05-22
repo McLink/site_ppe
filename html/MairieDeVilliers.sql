@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS ENFANTS
    IDENF int not null auto_increment  ,
    IDCLIENT int NOT NULL  ,
    IDINSCRIT int NOT NULL  ,
-   IDCLIENT_1 CHAR(6) NOT NULL  ,
+   IDCLIENT_1 int NOT NULL  ,
    IDEMPLOYE int NOT NULL  ,
    NOM VARCHAR(40) NULL  ,
    PRENOM VARCHAR(40) NULL  ,
@@ -274,7 +274,7 @@ ALTER TABLE INSCRIRE2
 ALTER TABLE INSCRIRE2 
   ADD FOREIGN KEY FK_INSCRIRE2_PERSONNE (IDCLIENT)
       REFERENCES PERSONNE (IDCLIENT) ;
-      
+
 # -----------------------------------------------------------------------------
 #       conversion de la base en utf8
 # -----------------------------------------------------------------------------
