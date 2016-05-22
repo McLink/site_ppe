@@ -8,7 +8,6 @@ use MairieDeVilliers;
 CREATE TABLE IF NOT EXISTS PERSONNE
  (
    IDCLIENT int not null auto_increment ,
-   CODECAT int NOT NULL  ,
    SEXE VARCHAR(15) NULL  ,
    NOM VARCHAR(35) NULL  ,
    PRENOM VARCHAR(35) NULL  ,
@@ -24,15 +23,6 @@ CREATE TABLE IF NOT EXISTS PERSONNE
  comment = "";
 
  
-
-# -----------------------------------------------------------------------------
-#       INDEX DE LA TABLE PERSONNE
-# -----------------------------------------------------------------------------
-
-
-CREATE  INDEX I_FK_PERSONNE_CATEGORIEPRO
-     ON PERSONNE (CODECAT ASC);
-
 # -----------------------------------------------------------------------------
 #       TABLE : CANTINE
 # -----------------------------------------------------------------------------
@@ -127,17 +117,7 @@ CREATE  INDEX I_FK_FORMULAIRE_EMPLOYE
 CREATE UNIQUE INDEX I_FK_FORMULAIRE_PERSONNE
      ON FORMULAIRE (IDCLIENT ASC);
 
-# -----------------------------------------------------------------------------
-#       TABLE : CATEGORIEPRO
-# -----------------------------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS CATEGORIEPRO
- (
-   CODECAT int not null auto_increment  ,
-   LIBELLECAT varchar(32) NULL  
-   , PRIMARY KEY (CODECAT) 
- ) 
- comment = "";
 
 # -----------------------------------------------------------------------------
 #       TABLE : EMPLOYE
@@ -225,10 +205,6 @@ CREATE  INDEX I_FK_INSCRIRE2_PERSONNE
 #       CREATION DES REFERENCES DE TABLE
 # -----------------------------------------------------------------------------
 
-
-ALTER TABLE PERSONNE 
-  ADD FOREIGN KEY FK_PERSONNE_CATEGORIEPRO (CODECAT)
-      REFERENCES CATEGORIEPRO (CODECAT) ;
 
 
 ALTER TABLE CANTINE 
