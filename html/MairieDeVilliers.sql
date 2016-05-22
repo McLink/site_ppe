@@ -17,10 +17,12 @@ CREATE TABLE IF NOT EXISTS PERSONNE
    TEL VARCHAR(10) NULL  ,
    EMAIL VARCHAR(50) NULL  ,
    Login varchar(25),
-   Mot_de_Passe varchar(40),
+   Mot_de_Passe varchar(50),
    PRIMARY KEY (IDCLIENT) 
  ) 
  comment = "";
+
+
 
  
 # -----------------------------------------------------------------------------
@@ -205,8 +207,6 @@ CREATE  INDEX I_FK_INSCRIRE2_PERSONNE
 #       CREATION DES REFERENCES DE TABLE
 # -----------------------------------------------------------------------------
 
-
-
 ALTER TABLE CANTINE 
   ADD FOREIGN KEY FK_CANTINE_PERIODE_CANTINE (CODEPERIODE)
       REFERENCES PERIODE_CANTINE (CODEPERIODE) ;
@@ -257,3 +257,13 @@ ALTER TABLE INSCRIRE2
 
 ALTER DATABASE MairieDeVilliers charset=utf8;
 
+# -----------------------------------------------------------------------------
+#       insertion de donnée
+# -----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
+#       table personne
+# -----------------------------------------------------------------------------
+ INSERT INTO Personne (IDCLIENT, SEXE, NOM, PRENOM, DATENAISS, ADRESSE, CP, TEL, EMAIL,Login, Mot_de_Passe)
+ VALUES ('', 'm', 'vilcoque', 'quentin', '1992/07/30', '23 rue lol', 78003, 0668989956, 
+        'q.vil@gmail.fr', 'lolo', PASSWORD('1234'));
