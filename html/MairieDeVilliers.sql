@@ -8,7 +8,7 @@ use MairieDeVilliers;
 CREATE TABLE IF NOT EXISTS PERSONNE
  (
    IDCLIENT int not null auto_increment ,
-   CODECAT CHAR(32) NOT NULL  ,
+   CODECAT int NOT NULL  ,
    SEXE VARCHAR(15) NULL  ,
    NOM VARCHAR(35) NULL  ,
    PRENOM VARCHAR(35) NULL  ,
@@ -16,10 +16,14 @@ CREATE TABLE IF NOT EXISTS PERSONNE
    ADRESSE VARCHAR(60) NULL  ,
    CP VARCHAR(6) NULL  ,
    TEL VARCHAR(10) NULL  ,
-   EMAIL VARCHAR(50) NULL  
-   , PRIMARY KEY (IDCLIENT) 
+   EMAIL VARCHAR(50) NULL  ,
+   Login varchar(25),
+   Mot_de_Passe varchar(40),
+   PRIMARY KEY (IDCLIENT) 
  ) 
  comment = "";
+
+ 
 
 # -----------------------------------------------------------------------------
 #       INDEX DE LA TABLE PERSONNE
@@ -35,7 +39,7 @@ CREATE  INDEX I_FK_PERSONNE_CATEGORIEPRO
 
 CREATE TABLE IF NOT EXISTS CANTINE
  (
-   IDINSCRIT char(4) NOT NULL  ,
+   IDINSCRIT int not null auto_increment ,
    CODEPERIODE CHAR(32) NOT NULL  ,
    ETABLISSEMENT VARCHAR(32) NULL  ,
    DATEINSCRIPTION date NULL  ,
@@ -54,12 +58,23 @@ CREATE  INDEX I_FK_CANTINE_PERIODE_CANTINE
      ON CANTINE (CODEPERIODE ASC);
 
 # -----------------------------------------------------------------------------
+#       TABLE : Identifiant
+# -----------------------------------------------------------------------------
+
+Create table Identifiant(IDLogin int(3) not null,
+             MotDePasse varchar(15),
+             IDClient int(3) not null,
+             Primary Key(IDLogin,IDClient),
+             Foreign Key(IDClient) References Personne(IDClient));
+
+
+# -----------------------------------------------------------------------------
 #       TABLE : CENTRE_DE_LOISIRS
 # -----------------------------------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS CENTRE_DE_LOISIRS
  (
-   IDINSCRIT CHAR(32) NOT NULL  ,
+   IDINSCRIT int not null auto_increment  ,
    ECOLE CHAR(32) NULL  ,
    DATEINSCRIPTIONS DATE NULL  ,
    REGION CHAR(32) NULL  ,
@@ -88,8 +103,8 @@ CREATE TABLE IF NOT EXISTS PERIODE_CANTINE
 
 CREATE TABLE IF NOT EXISTS FORMULAIRE
  (
-   IDFORM CHAR(32) NOT NULL  ,
-   IDEMPLOYE CHAR(6) NOT NULL  ,
+   IDFORM int not null auto_increment ,
+   IDEMPLOYE int NOT NULL  ,
    IDCLIENT int NOT NULL  ,
    CATEGORIE CHAR(32) NULL  ,
    ADRESSERESIDENCE VARCHAR(32) NULL  ,
@@ -115,7 +130,7 @@ CREATE UNIQUE INDEX I_FK_FORMULAIRE_PERSONNE
 
 CREATE TABLE IF NOT EXISTS CATEGORIEPRO
  (
-   CODECAT CHAR(32) NOT NULL  ,
+   CODECAT int not null auto_increment  ,
    LIBELLECAT varchar(32) NULL  
    , PRIMARY KEY (CODECAT) 
  ) 
@@ -127,7 +142,7 @@ CREATE TABLE IF NOT EXISTS CATEGORIEPRO
 
 CREATE TABLE IF NOT EXISTS EMPLOYE
  (
-   IDEMPLOYE CHAR(6) NOT NULL  ,
+   IDEMPLOYE int not null auto_increment  ,
    CIVILITE VARCHAR(4) NULL  ,
    NOM VARCHAR(35) NULL  ,
    PRENOM VARCHAR(35) NULL  ,
@@ -146,11 +161,11 @@ CREATE TABLE IF NOT EXISTS EMPLOYE
 
 CREATE TABLE IF NOT EXISTS ENFANTS
  (
-   IDENF VARCHAR(4) NOT NULL  ,
+   IDENF int not null auto_increment  ,
    IDCLIENT int NOT NULL  ,
-   IDINSCRIT VARCHAR(4) NOT NULL  ,
+   IDINSCRIT int NOT NULL  ,
    IDCLIENT_1 CHAR(6) NOT NULL  ,
-   IDEMPLOYE CHAR(6) NOT NULL  ,
+   IDEMPLOYE int NOT NULL  ,
    NOM VARCHAR(40) NULL  ,
    PRENOM VARCHAR(40) NULL  ,
    DATEN DATE NULL  ,
@@ -182,7 +197,7 @@ CREATE  INDEX I_FK_ENFANTS_EMPLOYE
 
 CREATE TABLE IF NOT EXISTS INSCRIRE2
  (
-   IDINSCRIT CHAR(32) NOT NULL  ,
+   IDINSCRIT int NOT NULL  ,
    IDCLIENT int NOT NULL  ,
    DATEINSCRIPTION date NULL  ,
    DATEFINABONNEMENT date NULL  ,
