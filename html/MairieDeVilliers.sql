@@ -266,8 +266,8 @@ ALTER DATABASE MairieDeVilliers charset=utf8;
 # -----------------------------------------------------------------------------
  INSERT INTO Personne (IDCLIENT, SEXE, NOM, PRENOM, DATENAISS, ADRESSE, CP, TEL, EMAIL,Login, Mot_de_Passe)
  VALUES ('', 'm', 'vilcoque', 'quentin', '1992/07/30', '23 rue lol', 78003, 0668989956, 
-        'q.vil@gmail.fr', 'lolo', PASSWORD('1234'));
+        'q.vil@gmail.fr', 'lolo', sha1('1234'));
 
  INSERT INTO Personne (IDCLIENT, SEXE, NOM, PRENOM, DATENAISS, ADRESSE, CP, TEL, EMAIL,Login, Mot_de_Passe)
  VALUES ('', 'm', 'utilisateur', 'test', '1992/07/30', '23 rue tot', 78003, 0668989956, 
-        'q.vil@gmail.fr', 'moixv', PASSWORD('123456'));
+        'q.vil@gmail.fr', 'moixv', sha1('123456'));
