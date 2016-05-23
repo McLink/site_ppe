@@ -1,124 +1,273 @@
-Create database MairieDeVilliers;
-Use MairieDeVilliers;
+DROP Database MairieDeVilliers;
+CREATE Database MairieDeVilliers;
+use MairieDeVilliers;
+# -----------------------------------------------------------------------------
+#       TABLE : PERSONNE
+# -----------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS PERSONNE
+ (
+   IDCLIENT int not null auto_increment ,
+   SEXE VARCHAR(15) NULL  ,
+   NOM VARCHAR(35) NULL  ,
+   PRENOM VARCHAR(35) NULL  ,
+   DATENAISS DATE NULL  ,
+   ADRESSE VARCHAR(60) NULL  ,
+   CP VARCHAR(6) NULL  ,
+   TEL VARCHAR(10) NULL  ,
+   EMAIL VARCHAR(50) NULL  ,
+   Login varchar(25),
+   Mot_de_Passe varchar(50),
+   PRIMARY KEY (IDCLIENT) 
+ ) 
+ comment = "";
 
 
 
-Create table Personne(IDClient int auto_increment,
-					  Sexe varchar(1),
-					  Nom varchar(20),
-					  Prenom varchar(20),
-					  DateNaiss date,
-					  Adresse varchar(25),
-					  CP int(5) not null,
-					  Tel int(10) not null,
-					  Email varchar(25),
-					  Login varchar(25),
-					  Mot_de_Passe varchar(40),
-					  Primary Key(IDClient));
-                      
-Create table PeriodeCantine(CodePeriode int(3) not null,
-							DateDebut date,
-							DateFin date,
-							Tarif decimal(10,2),
-							Primary Key(CodePeriode));
+ 
+# -----------------------------------------------------------------------------
+#       TABLE : CANTINE
+# -----------------------------------------------------------------------------
 
-Create table PeriodeCentreLoisirs(CodePeriode int(3) not null,
-								  DateDebut date,
-								  DateFin date,
-								  Tarif decimal(10,2),
-								  Primary Key(CodePeriode));
+CREATE TABLE IF NOT EXISTS CANTINE
+ (
+   IDINSCRIT int not null auto_increment ,
+   CODEPERIODE CHAR(32) NOT NULL  ,
+   ETABLISSEMENT VARCHAR(32) NULL  ,
+   DATEINSCRIPTION date NULL  ,
+   CAPACITE CHAR(32) NULL  ,
+   NBENFANT INTEGER NULL  
+   , PRIMARY KEY (IDINSCRIT) 
+ ) 
+ comment = "";
 
-Create table CategoriePro(CodeCat int (3) not null,
-						  LibelleCat varchar (25),
-						  IdClient int(3),
-						  Primary Key(CodeCat,IdClient),
-						  Foreign Key(IdClient) References Personne(IdClient));
+# -----------------------------------------------------------------------------
+#       INDEX DE LA TABLE CANTINE
+# -----------------------------------------------------------------------------
 
-Create table Formulaire(IDForm int(3) not null,
-						Categorie varchar(25),
-						AdresseResidence varchar(25),
-						Motif varchar(20),
-						Primary Key(IDForm));
 
-/*Create table Appartenir(IDClient int(3) not null,
-						CodeCat int(3) not null,
-						Primary Key(IDClient,CodeCat),
-						Foreign Key(IDClient) References Personne(IDClient),
-						Foreign Key(CodeCat) References CategoriePro(CodeCat));*/
-						
-/*Create table Demande(IDClient int(3) not null,
-					 IDForm int(3) not null,
-					 Primary Key(IDClient,IDForm),
-					 Foreign Key(IDClient) References Personne(IDClient),
-					 Foreign Key(IDForm) References Formulaire(IDForm));*/
+CREATE  INDEX I_FK_CANTINE_PERIODE_CANTINE
+     ON CANTINE (CODEPERIODE ASC);
 
-Create table CentreDeLoisirs(IDInscrit int(3) not null,
-							 Ecole varchar(20),
-							 DateInscription date,
-							 Region varchar(20),
-							 Capacite varchar(20),
-							 IDEnf int(3) not null,
-							 Primary Key(IDInscrit,IDEnf),
-							 Foreign Key(IDEnf) References Enfant(IDEnf));
-							 
-Create table Cantine(IDInscrit int(3) not null,
- 					 IDEnf int(3) not null,
-					 Etablissement varchar(25),
-					 DateInscription date,
-					 Capacite varchar(20),
-					 nbEnfant int(3) default 0,
-					 Primary Key(IDInscrit,IDEnf),
-					 Foreign Key(IDEnf) References Enfant(IDEnf));
+# -----------------------------------------------------------------------------
+#       TABLE : Identifiant
+# -----------------------------------------------------------------------------
 
-Create table DureeCantine(IDInscrit int(3) not null,
-						  CodePeriode int(3) not null,
-						  Primary Key(IDInscrit,CodePeriode),
-						  Foreign Key(IDInscrit) References Cantine(IDInscrit),
-						  Foreign Key(CodePeriode) References PeriodeCantine(CodePeriode));
+Create table if not exists Identifiant
+(
+  IDLogin int not null auto_increment ,
+  MotDePasse varchar(15),
+  IDClient int not null,
+  Primary Key(IDLogin),
+  Foreign Key(IDClient) References Personne(IDClient)
+);
 
-Create table DureeCentre(IDInscrit int(3) not null,
-						 CodePEriode int(3) not null,
-						 Primary Key(IDInscrit,CodePeriode),
-						 Foreign Key(IDInscrit) References CentreDeLoisirs(IDInscrit),
-						 Foreign Key(CodePeriode) References PeriodeCentre(CodePeriode));
 
-Create table Enfant(IDEnf int(3) not null,
-					Nom varchar(25),
-					Prenom varchar(25),
-					DateNaiss date,
-					Sexe varchar(1),
-					Primary Key(IDEnf));
+# -----------------------------------------------------------------------------
+#       TABLE : CENTRE_DE_LOISIRS
+# -----------------------------------------------------------------------------
 
-Create table Inscrire(IDEnf int(3) not null,
-					  IDClient int(3) not null,
-					  Primary Key(IDEnf,IDClient),
-					  Foreign Key(IDEnf) References Enfant(IDEnf),
-					  Foreign Key(IDClient) References Personne(IDClient));
+CREATE TABLE IF NOT EXISTS CENTRE_DE_LOISIRS
+ (
+   IDINSCRIT int not null auto_increment  ,
+   ECOLE CHAR(32) NULL  ,
+   DATEINSCRIPTIONS DATE NULL  ,
+   REGION CHAR(32) NULL  ,
+   CAPACITE CHAR(32) NULL  
+   , PRIMARY KEY (IDINSCRIT) 
+ ) 
+ comment = "";
 
-Create table InscrireCentre(IDEnf int(3) not null,
-							IDInscrit int(3) not null,
-							Primary Key(IDEnf,IDInscrit),
-							Foreign Key(IDEnf) References Enfant(IDEnf),
-							Foreign Key(IDInscrit) References CentreDeLoisirs(IDInscrit));
+# -----------------------------------------------------------------------------
+#       TABLE : PERIODE_CANTINE
+# -----------------------------------------------------------------------------
 
-Create table InscrireCantine(IDEnf int(3) not null,
-							 IDInscrit int(3) not null,
-							 Primary Key(IDEnf,IDInscrit),
-							 Foreign Key(IDEnf) References Enfant(IDEnf),
-							 Foreign Key(IDInscrit) References Cantine(IDInscrit));
+CREATE TABLE IF NOT EXISTS PERIODE_CANTINE
+ (
+   CODEPERIODE CHAR(32) NOT NULL  ,
+   DATEDEBUT date NULL  ,
+   DATEFIN date NULL  ,
+   TARIF CHAR(32) NULL  
+   , PRIMARY KEY (CODEPERIODE) 
+ ) 
+ comment = "";
 
-Create table Identifiant(IDLogin int(3) not null,
-						 MotDePasse varchar(15),
-						 IDClient int(3) not null,
-						 Primary Key(IDLogin,IDClient),
-						 Foreign Key(IDClient) References Personne(IDClient));
+# -----------------------------------------------------------------------------
+#       TABLE : FORMULAIRE
+# -----------------------------------------------------------------------------
 
-Create table Contact(IDContact int(3) not null,
-					 Nom varchar(25),
-					 Prenom varchar(25),
-					 Email varchar(20),
-					 Adresse varchar(25),
-					 CP int(5),
-					 Tel int(10),
-					 Motif varchar(500),
-					 Primary Key(IDContact));
+CREATE TABLE IF NOT EXISTS FORMULAIRE
+ (
+   IDFORM int not null auto_increment ,
+   IDEMPLOYE int NOT NULL  ,
+   IDCLIENT int NOT NULL  ,
+   CATEGORIE CHAR(32) NULL  ,
+   ADRESSERESIDENCE VARCHAR(32) NULL  ,
+   MOTIF CHAR(32) NULL  
+   , PRIMARY KEY (IDFORM) 
+ ) 
+ comment = "";
+
+# -----------------------------------------------------------------------------
+#       INDEX DE LA TABLE FORMULAIRE
+# -----------------------------------------------------------------------------
+
+
+CREATE  INDEX I_FK_FORMULAIRE_EMPLOYE
+     ON FORMULAIRE (IDEMPLOYE ASC);
+
+CREATE UNIQUE INDEX I_FK_FORMULAIRE_PERSONNE
+     ON FORMULAIRE (IDCLIENT ASC);
+
+
+
+# -----------------------------------------------------------------------------
+#       TABLE : EMPLOYE
+# -----------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS EMPLOYE
+ (
+   IDEMPLOYE int not null auto_increment  ,
+   CIVILITE VARCHAR(4) NULL  ,
+   NOM VARCHAR(35) NULL  ,
+   PRENOM VARCHAR(35) NULL  ,
+   DATENAISS DATE NULL  ,
+   ADRESSE VARCHAR(60) NULL  ,
+   CP VARCHAR(6) NULL  ,
+   TEL VARCHAR(10) NULL  ,
+   EMAIL VARCHAR(50) NULL  
+   , PRIMARY KEY (IDEMPLOYE) 
+ ) 
+ comment = "";
+
+# -----------------------------------------------------------------------------
+#       TABLE : ENFANTS
+# -----------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS ENFANTS
+ (
+   IDENF int not null auto_increment  ,
+   IDCLIENT int NOT NULL  ,
+   IDINSCRIT int NOT NULL  ,
+   IDCLIENT_1 int NOT NULL  ,
+   IDEMPLOYE int NOT NULL  ,
+   NOM VARCHAR(40) NULL  ,
+   PRENOM VARCHAR(40) NULL  ,
+   DATEN DATE NULL  ,
+   SEXE VARCHAR(1) NULL  
+   , PRIMARY KEY (IDENF) 
+ ) 
+ comment = "";
+
+# -----------------------------------------------------------------------------
+#       INDEX DE LA TABLE ENFANTS
+# -----------------------------------------------------------------------------
+
+
+CREATE  INDEX I_FK_ENFANTS_PERSONNE
+     ON ENFANTS (IDCLIENT ASC);
+
+CREATE  INDEX I_FK_ENFANTS_CANTINE
+     ON ENFANTS (IDINSCRIT ASC);
+
+CREATE  INDEX I_FK_ENFANTS_PERSONNE_2
+     ON ENFANTS (IDCLIENT_1 ASC);
+
+CREATE  INDEX I_FK_ENFANTS_EMPLOYE
+     ON ENFANTS (IDEMPLOYE ASC);
+
+# -----------------------------------------------------------------------------
+#       TABLE : INSCRIRE2
+# -----------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS INSCRIRE2
+ (
+   IDINSCRIT int NOT NULL  ,
+   IDCLIENT int NOT NULL  ,
+   DATEINSCRIPTION date NULL  ,
+   DATEFINABONNEMENT date NULL  ,
+   TARIF CHAR(32) NULL  
+   , PRIMARY KEY (IDINSCRIT,IDCLIENT) 
+ ) 
+ comment = "";
+
+# -----------------------------------------------------------------------------
+#       INDEX DE LA TABLE INSCRIRE2
+# -----------------------------------------------------------------------------
+
+
+CREATE  INDEX I_FK_INSCRIRE2_CENTRE_DE_LOISIRS
+     ON INSCRIRE2 (IDINSCRIT ASC);
+
+CREATE  INDEX I_FK_INSCRIRE2_PERSONNE
+     ON INSCRIRE2 (IDCLIENT ASC);
+
+
+# -----------------------------------------------------------------------------
+#       CREATION DES REFERENCES DE TABLE
+# -----------------------------------------------------------------------------
+
+ALTER TABLE CANTINE 
+  ADD FOREIGN KEY FK_CANTINE_PERIODE_CANTINE (CODEPERIODE)
+      REFERENCES PERIODE_CANTINE (CODEPERIODE) ;
+
+
+ALTER TABLE FORMULAIRE 
+  ADD FOREIGN KEY FK_FORMULAIRE_EMPLOYE (IDEMPLOYE)
+      REFERENCES EMPLOYE (IDEMPLOYE) ;
+
+
+ALTER TABLE FORMULAIRE 
+  ADD FOREIGN KEY FK_FORMULAIRE_PERSONNE (IDCLIENT)
+      REFERENCES PERSONNE (IDCLIENT) ;
+
+
+ALTER TABLE ENFANTS 
+  ADD FOREIGN KEY FK_ENFANTS_PERSONNE (IDCLIENT)
+      REFERENCES PERSONNE (IDCLIENT) ;
+
+
+ALTER TABLE ENFANTS 
+  ADD FOREIGN KEY FK_ENFANTS_CANTINE (IDINSCRIT)
+      REFERENCES CANTINE (IDINSCRIT) ;
+
+
+ALTER TABLE ENFANTS 
+  ADD FOREIGN KEY FK_ENFANTS_PERSONNE_2 (IDCLIENT_1)
+      REFERENCES PERSONNE (IDCLIENT) ;
+
+
+ALTER TABLE ENFANTS 
+  ADD FOREIGN KEY FK_ENFANTS_EMPLOYE (IDEMPLOYE)
+      REFERENCES EMPLOYE (IDEMPLOYE) ;
+
+
+ALTER TABLE INSCRIRE2 
+  ADD FOREIGN KEY FK_INSCRIRE2_CENTRE_DE_LOISIRS (IDINSCRIT)
+      REFERENCES CENTRE_DE_LOISIRS (IDINSCRIT) ;
+
+
+ALTER TABLE INSCRIRE2 
+  ADD FOREIGN KEY FK_INSCRIRE2_PERSONNE (IDCLIENT)
+      REFERENCES PERSONNE (IDCLIENT) ;
+
+# -----------------------------------------------------------------------------
+#       conversion de la base en utf8
+# -----------------------------------------------------------------------------
+
+ALTER DATABASE MairieDeVilliers charset=utf8;
+
+# -----------------------------------------------------------------------------
+#       insertion de donnée
+# -----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
+#       table personne
+# -----------------------------------------------------------------------------
+ INSERT INTO Personne (IDCLIENT, SEXE, NOM, PRENOM, DATENAISS, ADRESSE, CP, TEL, EMAIL,Login, Mot_de_Passe)
+ VALUES ('', 'm', 'vilcoque', 'quentin', '1992/07/30', '23 rue lol', 78003, 0668989956, 
+        'q.vil@gmail.fr', 'lolo', PASSWORD('1234'));
+
+ INSERT INTO Personne (IDCLIENT, SEXE, NOM, PRENOM, DATENAISS, ADRESSE, CP, TEL, EMAIL,Login, Mot_de_Passe)
+ VALUES ('', 'm', 'utilisateur', 'test', '1992/07/30', '23 rue tot', 78003, 0668989956, 
+        'q.vil@gmail.fr', 'moixv', PASSWORD('123456'));
