@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS PERSONNE
    DATENAISS DATE NULL  ,
    ADRESSE VARCHAR(60) NULL  ,
    CP VARCHAR(6) NULL  ,
+   VILLE VARCHAR(30) NULL  ,
    TEL VARCHAR(10) NULL  ,
    EMAIL VARCHAR(50) NULL  ,
    Login varchar(25),
@@ -49,18 +50,6 @@ CREATE TABLE IF NOT EXISTS CANTINE
 CREATE  INDEX I_FK_CANTINE_PERIODE_CANTINE
      ON CANTINE (CODEPERIODE ASC);
 
-# -----------------------------------------------------------------------------
-#       TABLE : Identifiant
-# -----------------------------------------------------------------------------
-
-Create table if not exists Identifiant
-(
-  IDLogin int not null auto_increment ,
-  MotDePasse varchar(15),
-  IDClient int not null,
-  Primary Key(IDLogin),
-  Foreign Key(IDClient) References Personne(IDClient)
-);
 
 
 # -----------------------------------------------------------------------------
@@ -128,12 +117,13 @@ CREATE UNIQUE INDEX I_FK_FORMULAIRE_PERSONNE
 CREATE TABLE IF NOT EXISTS EMPLOYE
  (
    IDEMPLOYE int not null auto_increment  ,
-   CIVILITE VARCHAR(4) NULL  ,
+   CIVILITE VARCHAR(10) NULL  ,
    NOM VARCHAR(35) NULL  ,
    PRENOM VARCHAR(35) NULL  ,
    DATENAISS DATE NULL  ,
    ADRESSE VARCHAR(60) NULL  ,
    CP VARCHAR(6) NULL  ,
+   VILLE VARCHAR(30) NULL  ,
    TEL VARCHAR(10) NULL  ,
    EMAIL VARCHAR(50) NULL  
    , PRIMARY KEY (IDEMPLOYE) 
@@ -264,10 +254,23 @@ ALTER DATABASE MairieDeVilliers charset=utf8;
 # -----------------------------------------------------------------------------
 #       table personne
 # -----------------------------------------------------------------------------
- INSERT INTO Personne (IDCLIENT, SEXE, NOM, PRENOM, DATENAISS, ADRESSE, CP, TEL, EMAIL,Login, Mot_de_Passe)
- VALUES ('', 'm', 'vilcoque', 'quentin', '1992/07/30', '23 rue lol', 78003, 0668989956, 
+ INSERT INTO Personne (IDCLIENT, SEXE, NOM, PRENOM, DATENAISS, ADRESSE, CP,VILLE, TEL, EMAIL,Login, Mot_de_Passe)
+ VALUES ('', 'm', 'vilcoque', 'quentin', '1992/07/30', '23 rue lol', 78003,'Paris', 0668989956, 
         'q.vil@gmail.fr', 'lolo', sha1('1234'));
 
- INSERT INTO Personne (IDCLIENT, SEXE, NOM, PRENOM, DATENAISS, ADRESSE, CP, TEL, EMAIL,Login, Mot_de_Passe)
- VALUES ('', 'm', 'utilisateur', 'test', '1992/07/30', '23 rue tot', 78003, 0668989956, 
+ INSERT INTO Personne (IDCLIENT, SEXE, NOM, PRENOM, DATENAISS, ADRESSE, CP, VILLE, TEL, EMAIL,Login, Mot_de_Passe)
+ VALUES ('', 'm', 'utilisateur', 'test', '1992/07/30', '23 rue tot', 78003,'Paris', 0668989956, 
         'q.vil@gmail.fr', 'moixv', sha1('123456'));
+
+
+ # -----------------------------------------------------------------------------
+#       table employe
+# -----------------------------------------------------------------------------
+
+INSERT INTO employe VALUES ('', 'monsieur', 'duriveau', 'robert', '1985/07/30', '30 avenue foche', 78017,'Paris', 0668989956, 
+        'duriveaugmail.fr');
+
+INSERT INTO employe VALUES ('', 'madame', 'keys', 'alice', '20/02/1880', '23 avenue hoche', 92800,'Colombes', 0668989956, 
+        'duriveaugmail.fr');
+
+
