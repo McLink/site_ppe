@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS FORMULAIRE
    IDFORM int not null auto_increment  ,
    IDPERSONNE int NOT NULL  ,
    ADRESSEMAIL CHAR(32) NULL  ,
-   MOTIF CHAR(32) NULL  
+   MOTIF VARCHAR(200) NULL  
    , PRIMARY KEY (IDFORM) 
  ) 
  comment = "";
@@ -213,3 +213,15 @@ VALUES (NULL, '2', 'keys', 'jean', '2000-05-04', 'monsieur');
 #       Insertion de données table cantine
 # -----------------------------------------------------------------------------
 
+INSERT INTO cantine (`IDINSCRIT`, `ETABLISSEMENT`, `CAPACITE`, `NBENFANTTOTAL`, `DATEDEB`, `DATEFIN`) VALUES 
+(NULL, 'jule verne', '200', '100', '2016-05-01', '2016-06-30');
+
+INSERT INTO cantine (`IDINSCRIT`, `ETABLISSEMENT`, `CAPACITE`, `NBENFANTTOTAL`, `DATEDEB`, `DATEFIN`) VALUES 
+(NULL, 'Malraux', '200', '40', '2016-03-01', '2017-04-30');
+
+# -----------------------------------------------------------------------------
+#       Insertion de données table inscrire cantine
+# -----------------------------------------------------------------------------
+
+INSERT INTO inscrire_cantine (`IDINSCRIT`, `IDENF`, `DATEINSCRIPTION`, `NBENFANT`) 
+VALUES ('1', '1', '2016-05-04', '1');
