@@ -1,56 +1,44 @@
-DROP Database MairieDeVilliers;
-CREATE Database MairieDeVilliers;
-use MairieDeVilliers;
+DROP DATABASE IF EXISTS MairieDeVilliers;
+
+CREATE DATABASE IF NOT EXISTS MairieDeVilliers;
+USE MairieDeVilliers;
 # -----------------------------------------------------------------------------
 #       TABLE : PERSONNE
 # -----------------------------------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS PERSONNE
  (
-   IDCLIENT int not null auto_increment ,
-   SEXE VARCHAR(15) NULL  ,
+   IDPERSONNE int not null auto_increment ,
+   SEXE VARCHAR(10) NULL  ,
    NOM VARCHAR(35) NULL  ,
    PRENOM VARCHAR(35) NULL  ,
    DATENAISS DATE NULL  ,
    ADRESSE VARCHAR(60) NULL  ,
-   CP VARCHAR(6) NULL  ,
-   VILLE VARCHAR(30) NULL  ,
+   CP VARCHAR(10) NULL  ,
+   Ville varchar(30),
    TEL VARCHAR(10) NULL  ,
-   EMAIL VARCHAR(50) NULL  ,
+   EMAIL VARCHAR(50) NULL ,
    Login varchar(25),
-   Mot_de_Passe varchar(50),
-   PRIMARY KEY (IDCLIENT) 
+   Mot_de_Passe varchar(50) , 
+   PRIMARY KEY (IDPERSONNE) 
  ) 
  comment = "";
 
-
-
- 
 # -----------------------------------------------------------------------------
 #       TABLE : CANTINE
 # -----------------------------------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS CANTINE
  (
-   IDINSCRIT int not null auto_increment ,
-   CODEPERIODE CHAR(32) NOT NULL  ,
-   ETABLISSEMENT VARCHAR(32) NULL  ,
-   DATEINSCRIPTION date NULL  ,
+   IDINSCRIT int not null auto_increment  ,
+   ETABLISSEMENT CHAR(32) NULL  ,
    CAPACITE CHAR(32) NULL  ,
-   NBENFANT INTEGER NULL  
-   , PRIMARY KEY (IDINSCRIT) 
+   NBENFANTTOTAL INTEGER NULL  ,
+   DATEDEB date NULL  ,
+   DATEFIN date NULL  , 
+   PRIMARY KEY (IDINSCRIT) 
  ) 
  comment = "";
-
-# -----------------------------------------------------------------------------
-#       INDEX DE LA TABLE CANTINE
-# -----------------------------------------------------------------------------
-
-
-CREATE  INDEX I_FK_CANTINE_PERIODE_CANTINE
-     ON CANTINE (CODEPERIODE ASC);
-
-
 
 # -----------------------------------------------------------------------------
 #       TABLE : CENTRE_DE_LOISIRS
@@ -61,23 +49,8 @@ CREATE TABLE IF NOT EXISTS CENTRE_DE_LOISIRS
    IDINSCRIT int not null auto_increment  ,
    ECOLE CHAR(32) NULL  ,
    DATEINSCRIPTIONS DATE NULL  ,
-   REGION CHAR(32) NULL  ,
    CAPACITE CHAR(32) NULL  
    , PRIMARY KEY (IDINSCRIT) 
- ) 
- comment = "";
-
-# -----------------------------------------------------------------------------
-#       TABLE : PERIODE_CANTINE
-# -----------------------------------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS PERIODE_CANTINE
- (
-   CODEPERIODE CHAR(32) NOT NULL  ,
-   DATEDEBUT date NULL  ,
-   DATEFIN date NULL  ,
-   TARIF CHAR(32) NULL  
-   , PRIMARY KEY (CODEPERIODE) 
  ) 
  comment = "";
 
@@ -87,11 +60,9 @@ CREATE TABLE IF NOT EXISTS PERIODE_CANTINE
 
 CREATE TABLE IF NOT EXISTS FORMULAIRE
  (
-   IDFORM int not null auto_increment ,
-   IDEMPLOYE int NOT NULL  ,
-   IDCLIENT int NOT NULL  ,
-   CATEGORIE CHAR(32) NULL  ,
-   ADRESSERESIDENCE VARCHAR(32) NULL  ,
+   IDFORM int not null auto_increment  ,
+   IDPERSONNE int NOT NULL  ,
+   ADRESSEMAIL CHAR(32) NULL  ,
    MOTIF CHAR(32) NULL  
    , PRIMARY KEY (IDFORM) 
  ) 
@@ -102,33 +73,8 @@ CREATE TABLE IF NOT EXISTS FORMULAIRE
 # -----------------------------------------------------------------------------
 
 
-CREATE  INDEX I_FK_FORMULAIRE_EMPLOYE
-     ON FORMULAIRE (IDEMPLOYE ASC);
-
 CREATE UNIQUE INDEX I_FK_FORMULAIRE_PERSONNE
-     ON FORMULAIRE (IDCLIENT ASC);
-
-
-
-# -----------------------------------------------------------------------------
-#       TABLE : EMPLOYE
-# -----------------------------------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS EMPLOYE
- (
-   IDEMPLOYE int not null auto_increment  ,
-   CIVILITE VARCHAR(10) NULL  ,
-   NOM VARCHAR(35) NULL  ,
-   PRENOM VARCHAR(35) NULL  ,
-   DATENAISS DATE NULL  ,
-   ADRESSE VARCHAR(60) NULL  ,
-   CP VARCHAR(6) NULL  ,
-   VILLE VARCHAR(30) NULL  ,
-   TEL VARCHAR(10) NULL  ,
-   EMAIL VARCHAR(50) NULL  
-   , PRIMARY KEY (IDEMPLOYE) 
- ) 
- comment = "";
+     ON FORMULAIRE (IDPERSONNE ASC);
 
 # -----------------------------------------------------------------------------
 #       TABLE : ENFANTS
@@ -137,14 +83,11 @@ CREATE TABLE IF NOT EXISTS EMPLOYE
 CREATE TABLE IF NOT EXISTS ENFANTS
  (
    IDENF int not null auto_increment  ,
-   IDCLIENT int NOT NULL  ,
-   IDINSCRIT int NOT NULL  ,
-   IDCLIENT_1 int NOT NULL  ,
-   IDEMPLOYE int NOT NULL  ,
+   IDPERSONNE int NOT NULL  ,
    NOM VARCHAR(40) NULL  ,
    PRENOM VARCHAR(40) NULL  ,
    DATEN DATE NULL  ,
-   SEXE VARCHAR(1) NULL  
+   SEXE VARCHAR(10) NULL  
    , PRIMARY KEY (IDENF) 
  ) 
  comment = "";
@@ -155,29 +98,45 @@ CREATE TABLE IF NOT EXISTS ENFANTS
 
 
 CREATE  INDEX I_FK_ENFANTS_PERSONNE
-     ON ENFANTS (IDCLIENT ASC);
-
-CREATE  INDEX I_FK_ENFANTS_CANTINE
-     ON ENFANTS (IDINSCRIT ASC);
-
-CREATE  INDEX I_FK_ENFANTS_PERSONNE_2
-     ON ENFANTS (IDCLIENT_1 ASC);
-
-CREATE  INDEX I_FK_ENFANTS_EMPLOYE
-     ON ENFANTS (IDEMPLOYE ASC);
+     ON ENFANTS (IDPERSONNE ASC);
 
 # -----------------------------------------------------------------------------
-#       TABLE : INSCRIRE2
+#       TABLE : INSCRIRE_CANTINE
+# -----------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS INSCRIRE_CANTINE
+ (
+   IDINSCRIT int not null,
+   IDENF int NOT NULL  , 
+   DATEINSCRIPTION date NULL  ,
+   NBENFANT CHAR(32) NULL  
+   , PRIMARY KEY (IDINSCRIT,IDENF) 
+ ) 
+ comment = "";
+
+# -----------------------------------------------------------------------------
+#       INDEX DE LA TABLE INSCRIRE_CANTINE
+# -----------------------------------------------------------------------------
+
+
+CREATE  INDEX I_FK_INSCRIRE_CANTINE_CANTINE
+     ON INSCRIRE_CANTINE (IDINSCRIT ASC);
+
+CREATE  INDEX I_FK_INSCRIRE_CANTINE_ENFANTS
+     ON INSCRIRE_CANTINE (IDENF ASC);
+
+# -----------------------------------------------------------------------------
+#       TABLE : INSCRIRE2 (Centre de loisirs)
 # -----------------------------------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS INSCRIRE2
  (
    IDINSCRIT int NOT NULL  ,
-   IDCLIENT int NOT NULL  ,
+   IDENF int NOT NULL  ,
    DATEINSCRIPTION date NULL  ,
    DATEFINABONNEMENT date NULL  ,
    TARIF CHAR(32) NULL  
-   , PRIMARY KEY (IDINSCRIT,IDCLIENT) 
+   , PRIMARY KEY (IDINSCRIT,IDENF) 
  ) 
  comment = "";
 
@@ -189,47 +148,33 @@ CREATE TABLE IF NOT EXISTS INSCRIRE2
 CREATE  INDEX I_FK_INSCRIRE2_CENTRE_DE_LOISIRS
      ON INSCRIRE2 (IDINSCRIT ASC);
 
-CREATE  INDEX I_FK_INSCRIRE2_PERSONNE
-     ON INSCRIRE2 (IDCLIENT ASC);
+CREATE  INDEX I_FK_INSCRIRE2_ENFANTS
+     ON INSCRIRE2 (IDENF ASC);
 
 
 # -----------------------------------------------------------------------------
 #       CREATION DES REFERENCES DE TABLE
 # -----------------------------------------------------------------------------
 
-ALTER TABLE CANTINE 
-  ADD FOREIGN KEY FK_CANTINE_PERIODE_CANTINE (CODEPERIODE)
-      REFERENCES PERIODE_CANTINE (CODEPERIODE) ;
-
 
 ALTER TABLE FORMULAIRE 
-  ADD FOREIGN KEY FK_FORMULAIRE_EMPLOYE (IDEMPLOYE)
-      REFERENCES EMPLOYE (IDEMPLOYE) ;
-
-
-ALTER TABLE FORMULAIRE 
-  ADD FOREIGN KEY FK_FORMULAIRE_PERSONNE (IDCLIENT)
-      REFERENCES PERSONNE (IDCLIENT) ;
+  ADD FOREIGN KEY FK_FORMULAIRE_PERSONNE (IDPERSONNE)
+      REFERENCES PERSONNE (IDPERSONNE) ;
 
 
 ALTER TABLE ENFANTS 
-  ADD FOREIGN KEY FK_ENFANTS_PERSONNE (IDCLIENT)
-      REFERENCES PERSONNE (IDCLIENT) ;
+  ADD FOREIGN KEY FK_ENFANTS_PERSONNE (IDPERSONNE)
+      REFERENCES PERSONNE (IDPERSONNE) ;
 
 
-ALTER TABLE ENFANTS 
-  ADD FOREIGN KEY FK_ENFANTS_CANTINE (IDINSCRIT)
+ALTER TABLE INSCRIRE_CANTINE 
+  ADD FOREIGN KEY FK_INSCRIRE_CANTINE_CANTINE (IDINSCRIT)
       REFERENCES CANTINE (IDINSCRIT) ;
 
 
-ALTER TABLE ENFANTS 
-  ADD FOREIGN KEY FK_ENFANTS_PERSONNE_2 (IDCLIENT_1)
-      REFERENCES PERSONNE (IDCLIENT) ;
-
-
-ALTER TABLE ENFANTS 
-  ADD FOREIGN KEY FK_ENFANTS_EMPLOYE (IDEMPLOYE)
-      REFERENCES EMPLOYE (IDEMPLOYE) ;
+ALTER TABLE INSCRIRE_CANTINE 
+  ADD FOREIGN KEY FK_INSCRIRE_CANTINE_ENFANTS (IDENF)
+      REFERENCES ENFANTS (IDENF) ;
 
 
 ALTER TABLE INSCRIRE2 
@@ -238,39 +183,33 @@ ALTER TABLE INSCRIRE2
 
 
 ALTER TABLE INSCRIRE2 
-  ADD FOREIGN KEY FK_INSCRIRE2_PERSONNE (IDCLIENT)
-      REFERENCES PERSONNE (IDCLIENT) ;
+  ADD FOREIGN KEY FK_INSCRIRE2_ENFANTS (IDENF)
+      REFERENCES ENFANTS (IDENF) ;
+
+
 
 # -----------------------------------------------------------------------------
-#       conversion de la base en utf8
+#       Insertion de données table PERSONNE
 # -----------------------------------------------------------------------------
 
-ALTER DATABASE MairieDeVilliers charset=utf8;
+INSERT INTO personne (`IDPERSONNE`, `SEXE`, `NOM`, `PRENOM`, `DATENAISS`, `ADRESSE`, `CP`, `Ville`, `TEL`, `EMAIL`, `Login`, `Mot_de_Passe`) 
+VALUES (NULL, 'monsieur', 'vilcoque', 'quentin', '2016-05-04', '23 rue paul', '75017', 'paris', '0638645823', 'q.vil@gmail.com', 'lolo', SHA1('1234'));
+
+INSERT INTO personne (`IDPERSONNE`, `SEXE`, `NOM`, `PRENOM`, `DATENAISS`, `ADRESSE`, `CP`, `Ville`, `TEL`, `EMAIL`, `Login`, `Mot_de_Passe`) 
+VALUES (NULL, 'madame', 'keys', 'alice', '2016-05-04', '23 rue lab', '92700', 'colombes', '0638647828', 'alice.keys@gmail.com', 'alice12', SHA1('123456'));
+
 
 # -----------------------------------------------------------------------------
-#       insertion de donnÃ©e
+#       Insertion de données table enfant
 # -----------------------------------------------------------------------------
 
+INSERT INTO enfants (`IDENF`, `IDPERSONNE`, `NOM`, `PRENOM`, `DATEN`, `SEXE`) 
+VALUES (NULL, '1', 'vilcoque', 'jul', '2016-05-04', 'monsieur');
+
+INSERT INTO enfants (`IDENF`, `IDPERSONNE`, `NOM`, `PRENOM`, `DATEN`, `SEXE`) 
+VALUES (NULL, '2', 'keys', 'jean', '2000-05-04', 'monsieur');
+
 # -----------------------------------------------------------------------------
-#       table personne
+#       Insertion de données table cantine
 # -----------------------------------------------------------------------------
- INSERT INTO Personne (IDCLIENT, SEXE, NOM, PRENOM, DATENAISS, ADRESSE, CP,VILLE, TEL, EMAIL,Login, Mot_de_Passe)
- VALUES ('', 'm', 'vilcoque', 'quentin', '1992/07/30', '23 rue lol', 78003,'Paris', 0668989956, 
-        'q.vil@gmail.fr', 'lolo', sha1('1234'));
-
- INSERT INTO Personne (IDCLIENT, SEXE, NOM, PRENOM, DATENAISS, ADRESSE, CP, VILLE, TEL, EMAIL,Login, Mot_de_Passe)
- VALUES ('', 'm', 'utilisateur', 'test', '1992/07/30', '23 rue tot', 78003,'Paris', 0668989956, 
-        'q.vil@gmail.fr', 'moixv', sha1('123456'));
-
-
- # -----------------------------------------------------------------------------
-#       table employe
-# -----------------------------------------------------------------------------
-
-INSERT INTO employe VALUES ('', 'monsieur', 'duriveau', 'robert', '1985/07/30', '30 avenue foche', 78017,'Paris', 0668989956, 
-        'duriveaugmail.fr');
-
-INSERT INTO employe VALUES ('', 'madame', 'keys', 'alice', '20/02/1880', '23 avenue hoche', 92800,'Colombes', 0668989956, 
-        'duriveaugmail.fr');
-
 
