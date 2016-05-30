@@ -130,7 +130,7 @@ CREATE  INDEX I_FK_INSCRIRE_CANTINE_ENFANTS
 #       TABLE : INSCRIRE2 (Centre de loisirs)
 # -----------------------------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS INSCRIRE2
+CREATE TABLE IF NOT EXISTS INSCRIRE_CENTRE_DE_LOISIRS
  (
    IDINSCRIT int NOT NULL  ,
    IDENF int NOT NULL  ,
@@ -146,11 +146,11 @@ CREATE TABLE IF NOT EXISTS INSCRIRE2
 # -----------------------------------------------------------------------------
 
 
-CREATE  INDEX I_FK_INSCRIRE2_CENTRE_DE_LOISIRS
-     ON INSCRIRE2 (IDINSCRIT ASC);
+CREATE  INDEX I_FK_INSCRIRE_CENTRE_DE_LOISIRS_CENTRE_DE_LOISIRS
+     ON INSCRIRE_CENTRE_DE_LOISIRS (IDINSCRIT ASC);
 
-CREATE  INDEX I_FK_INSCRIRE2_ENFANTS
-     ON INSCRIRE2 (IDENF ASC);
+CREATE  INDEX I_FK_IINSCRIRE_CENTRE_DE_LOISIRS_ENFANTS
+     ON INSCRIRE_CENTRE_DE_LOISIRS (IDENF ASC);
 
 
 # -----------------------------------------------------------------------------
@@ -178,13 +178,13 @@ ALTER TABLE INSCRIRE_CANTINE
       REFERENCES ENFANTS (IDENF) ;
 
 
-ALTER TABLE INSCRIRE2 
-  ADD FOREIGN KEY FK_INSCRIRE2_CENTRE_DE_LOISIRS (IDINSCRIT)
+ALTER TABLE INSCRIRE_CENTRE_DE_LOISIRS 
+  ADD FOREIGN KEY FK_INSCRIRE_CENTRE_DE_LOISIRS_CENTRE_DE_LOISIRS (IDINSCRIT)
       REFERENCES CENTRE_DE_LOISIRS (IDINSCRIT) ;
 
 
-ALTER TABLE INSCRIRE2 
-  ADD FOREIGN KEY FK_INSCRIRE2_ENFANTS (IDENF)
+ALTER TABLE INSCRIRE_CENTRE_DE_LOISIRS 
+  ADD FOREIGN KEY FK_INSCRIRE_CENTRE_DE_LOISIRS_ENFANTS (IDENF)
       REFERENCES ENFANTS (IDENF) ;
 
 
@@ -194,10 +194,16 @@ ALTER TABLE INSCRIRE2
 # -----------------------------------------------------------------------------
 
 INSERT INTO personne (`IDPERSONNE`, `SEXE`, `NOM`, `PRENOM`, `DATENAISS`, `ADRESSE`, `CP`, `Ville`, `TEL`, `EMAIL`, `Login`, `Mot_de_Passe`) 
-VALUES (NULL, 'monsieur', 'vilcoque', 'quentin', '2016-05-04', '23 rue paul', '75017', 'paris', '0638645823', 'q.vil@gmail.com', 'lolo', SHA1('1234'));
+VALUES (NULL, 'monsieur', 'vilcoque', 'quentin', '2016-05-04', '23 rue paul', '92700', 'villiers', '0638645823', 'q.vil@gmail.com', 'lolo', SHA1('1234'));
 
 INSERT INTO personne (`IDPERSONNE`, `SEXE`, `NOM`, `PRENOM`, `DATENAISS`, `ADRESSE`, `CP`, `Ville`, `TEL`, `EMAIL`, `Login`, `Mot_de_Passe`) 
-VALUES (NULL, 'madame', 'keys', 'alice', '2016-05-04', '23 rue lab', '92700', 'colombes', '0638647828', 'alice.keys@gmail.com', 'alice12', SHA1('123456'));
+VALUES (NULL, 'madame', 'keys', 'alice', '2016-05-04', '23 rue lab', '92700', 'villiers', '0638647828', 'alice.keys@gmail.com', 'alice12', SHA1('123456'));
+
+INSERT INTO personne (`IDPERSONNE`, `SEXE`, `NOM`, `PRENOM`, `DATENAISS`, `ADRESSE`, `CP`, `Ville`, `TEL`, `EMAIL`, `Login`, `Mot_de_Passe`) 
+VALUES (NULL, 'monsieur', 'beulai', 'maurice', '1889-05-04', '17 avenu foche', '92700', 'villiers', '0638998822', 'maurice.beulai@gmail.com', 'maurice32', SHA1('123mb'));
+
+INSERT INTO personne (`IDPERSONNE`, `SEXE`, `NOM`, `PRENOM`, `DATENAISS`, `ADRESSE`, `CP`, `Ville`, `TEL`, `EMAIL`, `Login`, `Mot_de_Passe`) 
+VALUES (NULL, 'madame', 'caste', 'veronique', '1889-07-22', '1 rue hoche', '92700', 'villiers', '0638647828', 'vero.caste@gmail.com', 'vero15', SHA1('123456vero'));
 
 
 # -----------------------------------------------------------------------------
@@ -209,6 +215,14 @@ VALUES (NULL, '1', 'vilcoque', 'jul', '2016-05-04', 'monsieur');
 
 INSERT INTO enfants (`IDENF`, `IDPERSONNE`, `NOM`, `PRENOM`, `DATEN`, `SEXE`) 
 VALUES (NULL, '2', 'keys', 'jean', '2000-05-04', 'monsieur');
+
+INSERT INTO enfants (`IDENF`, `IDPERSONNE`, `NOM`, `PRENOM`, `DATEN`, `SEXE`) 
+VALUES (NULL, '3', 'beaulai', 'jane', '2001-02-20', 'madame');
+
+INSERT INTO enfants (`IDENF`, `IDPERSONNE`, `NOM`, `PRENOM`, `DATEN`, `SEXE`) 
+VALUES (NULL, '4', 'caste', 'herve', '2015-02-20', 'monsieur');
+
+
 
 # -----------------------------------------------------------------------------
 #       Insertion de données table cantine
@@ -227,7 +241,23 @@ INSERT INTO cantine (`IDINSCRIT`, `ETABLISSEMENT`, `CAPACITE`, `NBENFANTTOTAL`, 
 INSERT INTO inscrire_cantine (`IDINSCRIT`, `IDENF`, `DATEINSCRIPTION`, `NBENFANT`) 
 VALUES ('1', '1', '2016-05-04', '1');
 
+# -----------------------------------------------------------------------------
+#       Insertion de données table centre_de_loisirs
+# -----------------------------------------------------------------------------
 
+INSERT INTO centre_de_loisirs (`IDINSCRIT`, `CENTRE`, `CAPACITE`, `DATEDEB`, `DATEFIN`) 
+VALUES (NULL, 'Au soleil', '40', '2016-05-01', '2016-07-01');
+
+INSERT INTO centre_de_loisirs (`IDINSCRIT`, `CENTRE`, `CAPACITE`, `DATEDEB`, `DATEFIN`) 
+VALUES (NULL, 'LE VILLAGE', '60', '2016-04-01', '2016-07-01');
+
+
+# -----------------------------------------------------------------------------
+#       Insertion de données table inscrire2 (centre_de_loisirs)
+# -----------------------------------------------------------------------------
+
+INSERT INTO INSCRIRE_CENTRE_DE_LOISIRS(`IDINSCRIT`, `IDENF`, `DATEINSCRIPTION`, `DATEFINABONNEMENT`, `TARIF`) 
+VALUES ('1', '3', '2016-05-03', '2016-05-21', '30 euros');
 
 # -----------------------------------------------------------------------------
 #       conversion en utf8
