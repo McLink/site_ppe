@@ -8,18 +8,6 @@ if(isset($_SESSION['login']))
     echo ' <a href="deco.php">Deconnexion</a>';
 }
 
-$dnn = $_POST["dn"]; // test
-
-        if(isset($_GET['id'])){
-            $id = intval($_GET['id']);
-            $dn = mysql_query('SELECT * FROM personne WHERE id = "'.$id.'"');
-            if(mysql_num_rows(dn)>0)
-            {
-                $dnn = mysql_fetch_array($dn);
-            }
-        }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -59,23 +47,20 @@ $dnn = $_POST["dn"]; // test
             </ul>
           </div>  
         
-<<<<<<< HEAD
-          <?php
-          include("connexion_base.php");
-          if(isset($_SESSION['Login']))
-          {
-            $id = intval($_GET['Login']);
-            $dn = mysql_query('SELECT Sexe, Nom, Prenom, Adresse, CP, Ville, Email, Tel, Login, Mot_de_Passe FROM personne WHERE login = "'.$Login.'"');
+        <?php  
+        if(isset($_GET['id'])){
+            $id = intval($_GET['id']);
+            $dn = mysql_query('SELECT * FROM personne WHERE id = "'.$id.'"');
             if(mysql_num_rows(dn)>0)
             {
                 $dnn = mysql_fetch_array($dn);
             }
-          }
-          ?>
+        }
+
+    $dnn = $_POST['id'];
+          
+ ?>         
     <section id="contact">   
-=======
-         
->>>>>>> 643920351ecee69e1a3d71cd9ec19afeca814edd
     <div class="container">
          <h1>Profil</h1>
             <div class="col-lg-10">
@@ -83,23 +68,22 @@ $dnn = $_POST["dn"]; // test
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="form-group">
                           <label for="nom">Pseudo :</label>
-                      <?php 
-                      echo htmlentities($dnn["login"]); ?>
+                      <?php echo htmlentities($dnn["login"]); ?>
                         </div>
                         <div class="form-group">
                           <label for="nom">Mot de passe :</label>
                           <?php echo htmlentities($dnn['password']); ?>
                         </div>  
                         <div class="form-group">
-                          <label for="nom">Nom</label>
+                          <label for="nom">Nom :</label>
                            <?php echo htmlentities($dnn['nom']); ?>
                         </div>
                         <div class="form-group">
-                          <label for="prenom">Prenom</label>
+                          <label for="prenom">Prenom :</label>
                            <?php echo htmlentities($dnn['prenom']); ?>
                         </div>
                         <div class="form-group"> 
-                          <label for="sexe">Sexe</label>
+                          <label for="sexe">Sexe :</label>
                           <?php echo htmlentities($dnn['sexe']); ?>
                         </div>
                         <div class="form-group">
@@ -107,30 +91,30 @@ $dnn = $_POST["dn"]; // test
                        <?php echo htmlentities($dnn['datenaiss']); ?>
                         </div>
                         <div class="form-group">
-                          <label for="adresse">Adresse</label>
+                          <label for="adresse">Adresse :</label>
                            <?php echo htmlentities($dnn['adresse']); ?>
                         </div>
                         <div class="form-group">
-                          <label for="cp">Code Postal</label>
+                          <label for="cp">Code Postal :</label>
                            <?php echo htmlentities($dnn['cp']); ?>
                         </div>
                         <div class="form-group">
-                          <label for="ville">Ville</label>
+                          <label for="ville">Ville :</label>
                          <?php echo htmlentities($dnn['ville']); ?>
                         </div>
                         <div class="form-group">
-                         <label for="email">Email</label>
+                         <label for="email">Email :</label>
                         <?php echo htmlentities($dnn['email']); ?>
                         </div>
                         <div class="form-group">
-                          <label for="tel">Telephone</label>
+                          <label for="tel">Telephone :</label>
                          <?php echo htmlentities($dnn['tel']); ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>   
+    </section>
    <div class="row">
       <footer class="col-lg-12">
         <div class="row">

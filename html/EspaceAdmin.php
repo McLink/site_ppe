@@ -19,7 +19,7 @@ if (isset($_SESSION['login']))
 
 <body>
 <header id="top">
-  <a href="../index.html"><img class="img-responsive" id="banniere" src="../Images/banniere2.png"></img></a>
+  <a href="EspaceAdmin.php"><img class="img-responsive" id="banniere" src="../Images/banniere2.png"></img></a>
 </header>
 <div class="container-fluid">
   <div class="row">
@@ -40,7 +40,7 @@ if (isset($_SESSION['login']))
           <!--Début de la barre de navigation -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav" id="couleur">
-              <li class="active"><a href="../index.php">Accueil<span class="sr-only">(current)</span></a></li>
+              <li class="active"><a href="EspaceAdmin.php">Accueil<span class="sr-only">(current)</span></a></li>
               <!--Ici on indique que l'icome de la page courante est celle active(donc grisée)-->
               <li><a href="../html/ModifComptes.php">Modification des comptes utilisateurs</a></li>
                 <li><a href="../html/ModifActivites.php">Modification des activitès</a></li>

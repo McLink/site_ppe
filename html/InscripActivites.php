@@ -44,7 +44,7 @@ if(isset($_SESSION['login']))
         <!--Ici on indique que l'icome de la page courante est celle active(donc grisée)-->
         <li><a href="InscripEnfant.php">Inscriptions d'un enfant</a></li>
         <li><a href="Activites.php">Activités</a></li>
-        <li><a href="../html/Enfant.php">Enfant(s)</a></li>
+        <li><a href="Enfant.php">Enfant(s)</a></li>
       </ul>
      <!--<form class="navbar-form navbar-right" action="connexion.php" method="POST">
         <div class="form-group">
@@ -76,7 +76,7 @@ if(isset($_SESSION['login']))
                           <input type="text" name="prenom" maxlength="20" class="form-control" id="prenom" placeholder="Entrez le Prenom">
                         </div>
                         <div class="form-group"> 
-                        <label for="cantine">Cantine</label>
+                        <label id="cantine" for="cantine">Cantine</label>
                         <form>
                             <select name="cantine">
                             <option>Cantine</option>
@@ -87,7 +87,7 @@ if(isset($_SESSION['login']))
                         </form>
                         </div>
                         <div class="form-group"> 
-                        <label for="centre">Centre de loisirs</label>
+                        <label id="centre" for="centre">Centre de loisirs</label>
                         <form>
                             <select name="centre">
                             <option>Centre de loisirs</option>

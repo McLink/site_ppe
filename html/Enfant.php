@@ -46,16 +46,16 @@ if(isset($_SESSION['login']))
           </div>  
         
           <?php
-          include("connexion_base.php");
-          if(isset($_SESSION['Login']))
-          {
-            $id = intval($_GET['nom']);
-            $dn = mysql_query('SELECT * FROM enfant WHERE nom = "'.$nom.'"');
-            if(mysql_num_rows($dn)>0)
+           if(isset($_GET['id'])){
+            $id = intval($_GET['id']);
+            $dn = mysql_query('SELECT * FROM enfant WHERE id = "'.$id.'"');
+            if(mysql_num_rows(dn)>0)
             {
                 $dnn = mysql_fetch_array($dn);
             }
-          }
+        }
+
+    $dnn = $_POST['id'];
           ?>
           
     <div class="container">
@@ -64,15 +64,15 @@ if(isset($_SESSION['login']))
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="form-group">
-                          <label for="nom">Nom</label>
+                          <label for="nom">Nom :</label>
                            <?php echo htmlentities($dnn['nom']); ?>
                         </div>
                         <div class="form-group">
-                          <label for="prenom">Prenom</label>
+                          <label for="prenom">Prenom :</label>
                            <?php echo htmlentities($dnn['prenom']); ?>
                         </div>
                         <div class="form-group"> 
-                          <label for="sexe">Sexe</label>
+                          <label for="sexe">Sexe :</label>
                           <?php echo htmlentities($dnn['sexe']); ?>
                         </div>
                         <div class="form-group">
