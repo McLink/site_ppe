@@ -45,18 +45,18 @@ if(isset($_SESSION['login']))
             </ul>
           </div>  
         
-          <?php
-           if(isset($_GET['id'])){
-            $id = intval($_GET['id']);
-            $dn = mysql_query('SELECT * FROM enfant WHERE id = "'.$id.'"');
+             <?php  
+          include("connexion_base.php");
+          if(isset($_SESSION['IDENF']))
+          {
+            $id = intval($_GET['IDENF']);
+            $dn = mysql_query('SELECT * FROM enfant WHERE IDENF = "'.$IDENF.'"');
             if(mysql_num_rows(dn)>0)
             {
                 $dnn = mysql_fetch_array($dn);
             }
         }
-
-    $dnn = $_POST['id'];
-          ?>
+    ?> 
           
     <div class="container">
          <h1>Profil</h1>
@@ -65,19 +65,19 @@ if(isset($_SESSION['login']))
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="form-group">
                           <label for="nom">Nom :</label>
-                           <?php echo htmlentities($dnn['nom']); ?>
+                           <?php echo htmlentities($_SESSION['nom']); ?>
                         </div>
                         <div class="form-group">
                           <label for="prenom">Prenom :</label>
-                           <?php echo htmlentities($dnn['prenom']); ?>
+                           <?php echo htmlentities($_SESSION['prenom']); ?>
                         </div>
                         <div class="form-group"> 
                           <label for="sexe">Sexe :</label>
-                          <?php echo htmlentities($dnn['sexe']); ?>
+                          <?php echo htmlentities($_SESSION['sexe']); ?>
                         </div>
                         <div class="form-group">
                         <label for="datanaiss">Date de naissance :</label>
-                       <?php echo htmlentities($dnn['datenaiss']); ?>
+                       <?php echo htmlentities($_SESSION['datenaiss']); ?>
                         </div>
                     </div>
                 </div>

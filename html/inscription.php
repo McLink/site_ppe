@@ -238,8 +238,8 @@ else
 //@mysql_select_db($BD_base) or die("Impossible de se connecter à la base de données");
 
 //Requete d'envoi des données
-$requete = $bdd->prepare("INSERT INTO Personne (SEXE, NOM, PRENOM, DATENAISS, ADRESSE, CP, TEL, EMAIL,Login, Mot_de_Passe)
- VALUES(:sexe,:nom,:prenom,:datenaiss, :adresse,:cp,:tel,:email,:login,:password);");
+$requete = $bdd->prepare("INSERT INTO personne(Sexe, Nom, Prenom, datenaiss, Adresse, CP, Ville, Tel, Email, Login, Mot_De_Passe) 
+	VALUES(:sexe,:nom,:prenom,:datenaiss, :adresse,:cp,:ville,:tel,:email,:login,:password);");
 $requete->execute(array(
 
 	'sexe'=>$sexe,
@@ -248,6 +248,7 @@ $requete->execute(array(
 	'datenaiss'=>$datenaiss,
 	'adresse'=>$adresse,
 	'cp'=>$cp,
+	'ville'=>$ville,
 	'tel'=>$tel,
 	'email'=>$email,
 	'login'=>$login,
