@@ -8,16 +8,6 @@ if(isset($_SESSION['login']))
     echo ' <a href="deco.php">Deconnexion</a>';
 }
 
-$dnn = $_POST["dn"]; // test
-
-        if(isset($_GET['id'])){
-            $id = intval($_GET['id']);
-            $dn = mysql_query('SELECT * FROM personne WHERE id = "'.$id.'"');
-            if(mysql_num_rows(dn)>0)
-            {
-                $dnn = mysql_fetch_array($dn);
-            }
-        }
 
 
 ?>
@@ -59,7 +49,6 @@ $dnn = $_POST["dn"]; // test
             </ul>
           </div>  
         
-<<<<<<< HEAD
           <?php
           include("connexion_base.php");
           if(isset($_SESSION['Login']))
@@ -72,10 +61,8 @@ $dnn = $_POST["dn"]; // test
             }
           }
           ?>
-    <section id="contact">   
-=======
-         
->>>>>>> 643920351ecee69e1a3d71cd9ec19afeca814edd
+    <section id="contact">
+
     <div class="container">
          <h1>Profil</h1>
             <div class="col-lg-10">
@@ -84,47 +71,48 @@ $dnn = $_POST["dn"]; // test
                         <div class="form-group">
                           <label for="nom">Pseudo :</label>
                       <?php 
-                      echo htmlentities($dnn["login"]); ?>
+                      echo htmlentities($_SESSION['login']); ?>
                         </div>
-                        <div class="form-group">
-                          <label for="nom">Mot de passe :</label>
-                          <?php echo htmlentities($dnn['password']); ?>
-                        </div>  
+           
                         <div class="form-group">
                           <label for="nom">Nom</label>
-                           <?php echo htmlentities($dnn['nom']); ?>
+                           <?php echo htmlentities($_SESSION['nom']); ?>
                         </div>
+
                         <div class="form-group">
                           <label for="prenom">Prenom</label>
-                           <?php echo htmlentities($dnn['prenom']); ?>
+                           <?php echo htmlentities($_SESSION['prenom']); ?>
                         </div>
+
                         <div class="form-group"> 
                           <label for="sexe">Sexe</label>
-                          <?php echo htmlentities($dnn['sexe']); ?>
+                          <?php echo htmlentities($_SESSION['sexe']); ?>
                         </div>
+
                         <div class="form-group">
                         <label for="datanaiss">Date de naissance :</label>
-                       <?php echo htmlentities($dnn['datenaiss']); ?>
+                       <?php echo htmlentities($_SESSION['datenaiss']); ?>
                         </div>
+
                         <div class="form-group">
                           <label for="adresse">Adresse</label>
-                           <?php echo htmlentities($dnn['adresse']); ?>
+                           <?php echo htmlentities($_SESSION['Adresse']); ?>
                         </div>
                         <div class="form-group">
                           <label for="cp">Code Postal</label>
-                           <?php echo htmlentities($dnn['cp']); ?>
+                           <?php echo htmlentities($_SESSION['CP']); ?>
                         </div>
                         <div class="form-group">
                           <label for="ville">Ville</label>
-                         <?php echo htmlentities($dnn['ville']); ?>
+                         <?php echo htmlentities($_SESSION['Ville']); ?>
                         </div>
                         <div class="form-group">
                          <label for="email">Email</label>
-                        <?php echo htmlentities($dnn['email']); ?>
+                        <?php echo htmlentities($_SESSION['Email']); ?>
                         </div>
                         <div class="form-group">
                           <label for="tel">Telephone</label>
-                         <?php echo htmlentities($dnn['tel']); ?>
+                         <?php echo htmlentities($_SESSION['Tel']); ?>
                         </div>
                     </div>
                 </div>
