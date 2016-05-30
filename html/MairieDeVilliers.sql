@@ -225,3 +225,13 @@ INSERT INTO cantine (`IDINSCRIT`, `ETABLISSEMENT`, `CAPACITE`, `NBENFANTTOTAL`, 
 
 INSERT INTO inscrire_cantine (`IDINSCRIT`, `IDENF`, `DATEINSCRIPTION`, `NBENFANT`) 
 VALUES ('1', '1', '2016-05-04', '1');
+
+
+
+
+
+
+# -----------------------------------------------------------------------------
+#       conversion en utf8
+# -----------------------------------------------------------------------------
+ALTER DATABASE MairieDeVilliers charset=utf8;
