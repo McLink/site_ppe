@@ -41,12 +41,13 @@ if(isset($_SESSION['login']))
     <!--Début de la barre de navigation -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav" id="couleur">
-              <li><a href="../html/Espace_Utilisateur.php">Profil</a></li>
-              <li><a href="../html/InscripEnfant.php">Inscription d'un enfant</a></li>
-              <li><a href="../html/InscripActivites.php">Inscription aux activités</a></li>
+        <li><a href="../index.php">Accueil</a></li>
+              <li><a href="Espace_Utilisateur.php">Profil</a></li>
+              <li><a href="InscripEnfant.php">Inscription d'un enfant</a></li>
+              <li><a href="InscripActivites.php">Inscription aux activités</a></li>
               <!--Ici on indique que l'icome de la page courante est celle active(donc grisée)-->
               <li class="active"><a href="../html/Enfant.php">Enfants</a></li>
-              <li><a href="../html/Activites.php">Activités</a></li>
+              <li><a href="Activites.php">Activités</a></li>
             </ul>
     </div> <!--/.navbar-collapse-->
   </div> <!--/.container-fluid-->

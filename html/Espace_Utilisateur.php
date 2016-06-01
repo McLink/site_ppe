@@ -40,12 +40,13 @@ if(isset($_SESSION['login']))
     <!--Début de la barre de navigation -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav" id="couleur">
-       <li class="active"><a href="../html/Espace_Utilisateur.php">Profil</a></li>
+       <li><a href="../index.php">Accueil</a></li>
+       <li class="active"><a href="Espace_Utilisateur.php">Profil</a></li>
               <!--Ici on indique que l'icome de la page courante est celle active(donc grisée)-->
-              <li><a href="../html/InscripEnfant.php">Inscription d'un enfant</a></li>
-              <li><a href="../html/InscripActivites.php">Inscription aux activités</a></li>
-              <li><a href="../html/Enfant.php">Enfant(s)</a></li>
-              <li><a href="../html/Activites.php">Activités</a></li>
+              <li><a href="InscripEnfant.php">Inscription d'un enfant</a></li>
+              <li><a href="InscripActivites.php">Inscription aux activités</a></li>
+              <li><a href="Enfant.php">Enfant(s)</a></li>
+              <li><a href="Activites.php">Activités</a></li>
     </div> <!--/.navbar-collapse-->
   </div> <!--/.container-fluid-->
 </nav>
@@ -116,9 +117,5 @@ if(isset($_SESSION['login']))
         </div>
         <br/>
 </section>
-
- 
-
-
 </body>
 </html>
