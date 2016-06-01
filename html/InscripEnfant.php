@@ -16,7 +16,6 @@ if(isset($_SESSION['login']))
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/tuto.css" rel="stylesheet">
   </head>
-
 <body>
 <header id="top">
   <a href="../index.php"><img class="img-responsive" id="banniere" src="../Images/banniere2.png"></img></a>

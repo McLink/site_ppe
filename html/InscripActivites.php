@@ -111,7 +111,7 @@ if(isset($_SESSION['login']))
 </section>
 
   <div class="row">
-    <footer class="col-lg-12">
+    <footer class="col-lg-14">
       <div class="row">
         <p class="col-lg-8">
          Ce site a été créé par Chung Steven et Quentin Vilcoque, Man Sophervuth, Malekama Dominique.

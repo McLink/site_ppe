@@ -35,19 +35,23 @@ if(isset($_SESSION['login']))
           </button>
           <!--Ici il s'agit du bouton permettant de faire défiler le menu lorsqu'il est réglé pour les mobiles-->
         </div>
-           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav" id="couleur">
-              <li class="active"><a href="../html/Espace_Utilisateur.php">Profil</a></li>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <!--Début de la barre de navigation -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav" id="couleur">
+       <li class="active"><a href="../html/Espace_Utilisateur.php">Profil</a></li>
               <!--Ici on indique que l'icome de la page courante est celle active(donc grisée)-->
               <li><a href="../html/InscripEnfant.php">Inscription d'un enfant</a></li>
               <li><a href="../html/InscripActivites.php">Inscription aux activités</a></li>
               <li><a href="../html/Enfant.php">Enfant(s)</a></li>
               <li><a href="../html/Activites.php">Activités</a></li>
-            </ul>
-          </div>  
-        
+    </div> <!--/.navbar-collapse-->
+  </div> <!--/.container-fluid-->
+</nav>
+</div>
 
-        <?php  
+<?php  
           include("connexion_base.php");
           if(isset($_SESSION['Login']))
           {
@@ -59,11 +63,11 @@ if(isset($_SESSION['login']))
             }
         }
     ?>       
-    <section id="contact">
 
-    <div class="container">
-         <h1>Profil</h1>
-            <div class="col-lg-10">
+<section id="contact">
+  <div class="container">
+      <h1>Profil</h1>
+          <div class="col-lg-10">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="form-group">
@@ -105,37 +109,16 @@ if(isset($_SESSION['login']))
                         <div class="form-group">
                           <label for="tel">Telephone :</label>
                          <?php echo htmlentities($_SESSION['Tel']); ?>
-                        </div>
+                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-   <div class="row">
-      <footer class="col-lg-12">
-        <div class="row">
-          <p class="col-lg-8">
-           Ce site a été créé par Chung Steven et Quentin Vilcoque, Man Sophervuth, Malekama Dominique.
-          </p>
-          <a href="#top"><p class="col-lg-offset-2 col-lg-2">
-            Haut de page 
-          </p>
-        </a>
-        </div>
-      </footer>
-    </div>
-  </div>
-    <script src="../js/jquery-1.11.2.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-      $('a[href^="#top"]').click(function(){
-      var the_id = $(this).attr("href");
+        <br/>
+</section>
 
-      $('html, body').animate({
-        scrollTop:$(the_id).offset().top
-      }, 'slow');
-      return false;
-      });
-    </script>
-  </body> 
+ 
+
+
+</body>
 </html>
